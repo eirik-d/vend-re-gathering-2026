@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Digital Canvas — Vend RE Gathering 2026</title>
+<style>
+  @font-face {
+    font-family: 'Vend Sans';
+    src: url('VendSans-variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --vend-brown: #7A2822;
+    --vend-green: #2FA044;
+    --vend-cream: #FAF7F2;
+    --vend-dark: #0a0a0a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vend Sans', system-ui, sans-serif;
+    background: var(--vend-dark);
+    color: var(--vend-cream);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    text-align: center;
+    padding: 2em 1em 1em;
+  }
+  header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--vend-cream), var(--vend-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  header p {
+    font-size: 0.9em;
+    opacity: 0.5;
+    margin-top: 0.3em;
+  }
+
+  /* Mosaic grid — 10 images in a dynamic layout */
+  .mosaic {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+    width: min(90vw, 1400px);
+    aspect-ratio: 5 / 2;
+    margin: 1em auto;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .mosaic-cell {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: transform 0.3s ease, z-index 0.3s;
+  }
+  .mosaic-cell:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(47, 160, 68, 0.3);
+  }
+
+  .mosaic-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mosaic-cell .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(122,40,34,0.2), rgba(47,160,68,0.1));
+    border: 1px dashed rgba(255,255,255,0.1);
+  }
+  .placeholder .group-num {
+    font-size: 2em;
+    font-weight: 800;
+    color: var(--vend-green);
+    opacity: 0.6;
+  }
+  .placeholder .group-theme {
+    font-size: 0.6em;
+    text-align: center;
+    padding: 0 1em;
+    opacity: 0.4;
+    margin-top: 0.3em;
+  }
+
+  .mosaic-cell .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    padding: 1em 0.8em 0.6em;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .mosaic-cell:hover .overlay {
+    opacity: 1;
+  }
+  .overlay .title {
+    font-weight: 700;
+    font-size: 0.75em;
+    color: white;
+  }
+  .overlay .statement {
+    font-size: 0.55em;
+    opacity: 0.7;
+    margin-top: 0.2em;
+    font-style: italic;
+  }
+
+  /* Controls */
+  .controls {
+    width: min(90vw, 1400px);
+    margin: 1em auto;
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .controls label {
+    font-size: 0.75em;
+    color: var(--vend-cream);
+    opacity: 0.6;
+  }
+
+  .upload-group {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 0.8em 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+  }
+
+  select, input[type="text"], input[type="file"] {
+    font-family: 'Vend Sans', system-ui, sans-serif;
+    font-size: 0.8em;
+    padding: 0.4em 0.6em;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: var(--vend-cream);
+  }
+
+  button {
+    font-family: 'Vend Sans', system-ui, sans-serif;
+    font-size: 0.8em;
+    padding: 0.5em 1.2em;
+    border-radius: 6px;
+    border: none;
+    background: var(--vend-green);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  button:hover { background: #248a38; }
+  button.secondary {
+    background: rgba(255,255,255,0.1);
+    color: var(--vend-cream);
+  }
+  button.secondary:hover { background: rgba(255,255,255,0.2); }
+
+  /* Fullscreen overlay for single image */
+  .fullscreen-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .fullscreen-overlay.active { display: flex; }
+  .fullscreen-overlay img {
+    max-width: 85vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  .fullscreen-overlay .meta {
+    margin-top: 1.5em;
+    text-align: center;
+  }
+  .fullscreen-overlay .meta h3 {
+    font-size: 1.5em;
+    color: var(--vend-green);
+  }
+  .fullscreen-overlay .meta p {
+    font-size: 1em;
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 0.3em;
+  }
+  .fullscreen-overlay .meta .group-label {
+    font-size: 0.7em;
+    opacity: 0.4;
+    margin-top: 0.5em;
+  }
+
+  /* Reveal animation */
+  .mosaic.revealing .mosaic-cell {
+    animation: cellReveal 0.6s ease-out backwards;
+  }
+  @keyframes cellReveal {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  footer {
+    margin-top: auto;
+    padding: 1.5em;
+    text-align: center;
+    font-size: 0.7em;
+    opacity: 0.3;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Digital Canvas</h1>
+  <p>Vend Marketplaces Real Estate — September 2026</p>
+</header>
+
+<div class="mosaic" id="mosaic"></div>
+
+<div class="controls">
+  <div class="upload-group">
+    <label>Group:</label>
+    <select id="groupSelect">
+      <option value="0">01 — AI & Home Search</option>
+      <option value="1">02 — Trust & Data</option>
+      <option value="2">03 — Competitors</option>
+      <option value="3">04 — Sustainability</option>
+      <option value="4">05 — Agent of Future</option>
+      <option value="5">06 — Global Shifts</option>
+      <option value="6">07 — Generational</option>
+      <option value="7">08 — Beyond Listings</option>
+      <option value="8">09 — Human Element</option>
+      <option value="9">10 — Regulation</option>
+    </select>
+    <input type="text" id="titleInput" placeholder="Artwork title" style="width: 160px;">
+    <input type="text" id="statementInput" placeholder="Artist statement" style="width: 220px;">
+    <input type="file" id="fileInput" accept="image/*">
+    <button onclick="uploadImage()">Add</button>
+  </div>
+  <button class="secondary" onclick="revealAll()">Reveal All</button>
+  <button class="secondary" onclick="exportCanvas()">Export</button>
+</div>
+
+<div class="fullscreen-overlay" id="fullscreen" onclick="closeFullscreen()">
+  <img id="fsImage" src="" alt="">
+  <div class="meta">
+    <h3 id="fsTitle"></h3>
+    <p id="fsStatement"></p>
+    <p class="group-label" id="fsGroup"></p>
+  </div>
+</div>
+
+<footer>
+  <img src="Vend_logo.svg.png" style="height: 18px; opacity: 0.5; margin-bottom: 0.5em; display: block; margin-left: auto; margin-right: auto;">
+  Vend Marketplaces Real Estate — Company Gathering 2026
+</footer>
+
+<script>
+const themes = [
+  'AI transforming how people find homes',
+  'The trust economy — transparency & data',
+  'New competitors & marketplace dynamics',
+  'Sustainability & green housing',
+  'The agent of the future',
+  'Global shifts & new market models',
+  'Generational shifts in homebuying',
+  'Platform innovation — beyond listings',
+  'The human element in a digital world',
+  'Regulation & compliance as innovation'
+];
+
+const cells = Array(10).fill(null).map((_, i) => ({
+  index: i,
+  theme: themes[i],
+  imageUrl: null,
+  title: '',
+  statement: ''
+}));
+
+function renderMosaic() {
+  const mosaic = document.getElementById('mosaic');
+  mosaic.innerHTML = '';
+
+  cells.forEach((cell, i) => {
+    const div = document.createElement('div');
+    div.className = 'mosaic-cell';
+    div.style.animationDelay = `${i * 0.1}s`;
+
+    if (cell.imageUrl) {
+      div.innerHTML = `
+        <img src="${cell.imageUrl}" alt="Group ${i + 1}">
+        <div class="overlay">
+          <div class="title">${cell.title || `Group ${i + 1}`}</div>
+          <div class="statement">${cell.statement || cell.theme}</div>
+        </div>
+      `;
+      div.onclick = () => showFullscreen(i);
+    } else {
+      div.innerHTML = `
+        <div class="placeholder">
+          <div class="group-num">${String(i + 1).padStart(2, '0')}</div>
+          <div class="group-theme">${cell.theme}</div>
+        </div>
+      `;
+    }
+
+    mosaic.appendChild(div);
+  });
+}
+
+function uploadImage() {
+  const groupIdx = parseInt(document.getElementById('groupSelect').value);
+  const title = document.getElementById('titleInput').value;
+  const statement = document.getElementById('statementInput').value;
+  const file = document.getElementById('fileInput').files[0];
+
+  if (!file) return alert('Please select an image file.');
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    cells[groupIdx].imageUrl = e.target.result;
+    cells[groupIdx].title = title;
+    cells[groupIdx].statement = statement;
+    renderMosaic();
+
+    document.getElementById('titleInput').value = '';
+    document.getElementById('statementInput').value = '';
+    document.getElementById('fileInput').value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+function showFullscreen(i) {
+  const cell = cells[i];
+  if (!cell.imageUrl) return;
+
+  document.getElementById('fsImage').src = cell.imageUrl;
+  document.getElementById('fsTitle').textContent = cell.title || `Group ${i + 1}`;
+  document.getElementById('fsStatement').textContent = cell.statement || '';
+  document.getElementById('fsGroup').textContent = `Group ${i + 1} — ${cell.theme}`;
+  document.getElementById('fullscreen').classList.add('active');
+}
+
+function closeFullscreen() {
+  document.getElementById('fullscreen').classList.remove('active');
+}
+
+function revealAll() {
+  const mosaic = document.getElementById('mosaic');
+  mosaic.classList.remove('revealing');
+  void mosaic.offsetWidth;
+  mosaic.classList.add('revealing');
+}
+
+function exportCanvas() {
+  const mosaic = document.getElementById('mosaic');
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const cellW = 400;
+  const cellH = 400;
+  const gap = 4;
+  canvas.width = cellW * 5 + gap * 4;
+  canvas.height = cellH * 2 + gap;
+
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  let loaded = 0;
+  const total = cells.filter(c => c.imageUrl).length;
+
+  if (total === 0) {
+    alert('No images uploaded yet.');
+    return;
+  }
+
+  cells.forEach((cell, i) => {
+    if (!cell.imageUrl) {
+      loaded++;
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      const col = i % 5;
+      const row = Math.floor(i / 5);
+      const x = col * (cellW + gap);
+      const y = row * (cellH + gap);
+
+      const scale = Math.max(cellW / img.width, cellH / img.height);
+      const sw = cellW / scale;
+      const sh = cellH / scale;
+      const sx = (img.width - sw) / 2;
+      const sy = (img.height - sh) / 2;
+      ctx.drawImage(img, sx, sy, sw, sh, x, y, cellW, cellH);
+
+      loaded++;
+      if (loaded >= total) {
+        const link = document.createElement('a');
+        link.download = 'vend-re-digital-canvas-2026.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }
+    };
+    img.src = cell.imageUrl;
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeFullscreen();
+});
+
+renderMosaic();
+</script>
+
+</body>
+</html>
