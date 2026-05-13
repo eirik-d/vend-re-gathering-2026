@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homecoming — Vend RE Gathering 2026</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
 <style>
   @font-face {
     font-family: 'Vend Sans';
@@ -13,378 +11,595 @@
     font-weight: 100 900;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'Vend Sans';
+    src: url('VendSans-Italic-variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+  }
 
   :root {
     --brown: #7A2822;
     --brown-dark: #3D1411;
+    --brown-mid: #5A1E19;
     --green: #2FA044;
+    --green-dim: rgba(47,160,68,0.15);
     --white: #FFFFFF;
+    --text: rgba(255,255,255,0.8);
+    --text-dim: rgba(255,255,255,0.4);
   }
 
-  .reveal {
-    font-family: 'Vend Sans', system-ui, sans-serif;
-    color: var(--white);
-  }
-  .reveal h1, .reveal h2, .reveal h3 {
-    font-family: 'Vend Sans', system-ui, sans-serif;
-    text-transform: none;
-    letter-spacing: -0.02em;
-    color: var(--white);
-  }
-  .reveal .slides section {
-    text-align: left;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vend Sans', system-ui, -apple-system, sans-serif;
     background: var(--brown-dark);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ─── Title slide ─── */
-  .slide-hero {
-    background: url('kistefoss.webp') center center / cover no-repeat !important;
-    display: flex !important;
+  /* ─── Hero ─── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    max-height: 900px;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    overflow: hidden;
   }
-  .slide-hero::after {
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('kistefoss.webp') center 40% / cover no-repeat;
+  }
+  .hero-bg::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(61,20,17,0.95) 0%, rgba(61,20,17,0.4) 45%, rgba(0,0,0,0.05) 100%);
+    background: linear-gradient(
+      to top,
+      rgba(61,20,17,1) 0%,
+      rgba(61,20,17,0.85) 25%,
+      rgba(61,20,17,0.3) 55%,
+      rgba(0,0,0,0.05) 100%
+    );
   }
-  .slide-hero .inner {
+  .hero-content {
     position: relative;
     z-index: 1;
-    padding: 40px 60px;
+    padding: 0 clamp(24px, 6vw, 120px) 60px;
+    max-width: 900px;
   }
-  .slide-hero h1 {
-    font-size: 3.8em;
-    font-weight: 800;
-    line-height: 1;
-  }
-  .slide-hero .event {
-    font-size: 0.85em;
-    font-weight: 600;
-    opacity: 0.6;
-    margin-bottom: 6px;
-  }
-  .slide-hero .sub {
-    font-size: 1.1em;
-    font-weight: 300;
-    opacity: 0.5;
-    margin-top: 6px;
-    font-style: italic;
-  }
-  .slide-hero .meta {
-    font-size: 0.6em;
-    opacity: 0.3;
-    margin-top: 24px;
-  }
-  .slide-hero .logo {
+  .hero-logo {
     position: absolute;
-    top: 30px;
-    right: 45px;
-    height: 20px;
-    opacity: 0.4;
+    top: 32px;
+    right: clamp(24px, 6vw, 120px);
+    height: 22px;
+    opacity: 0.5;
     z-index: 2;
   }
-
-  /* ─── Content slides ─── */
-  .s {
-    padding: 40px 60px !important;
+  .hero-event {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 8px;
   }
-  .badge {
-    font-size: 10px;
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.45;
+    margin-top: 8px;
+  }
+  .hero-meta {
+    font-size: 13px;
+    opacity: 0.25;
+    margin-top: 32px;
+    letter-spacing: 0.02em;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.2;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .scroll-hint svg { width: 24px; height: 24px; }
+  @keyframes pulse { 0%,100% { opacity: 0.15; } 50% { opacity: 0.35; } }
+
+  /* ─── Sections ─── */
+  section {
+    padding: 80px clamp(24px, 6vw, 120px);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--green);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
-  .s h2 {
-    font-size: 1.7em;
+  section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
     font-weight: 700;
-    margin: 0 0 16px 0;
+    color: var(--white);
+    letter-spacing: -0.02em;
     line-height: 1.15;
-  }
-
-  /* ─── Concept slide ─── */
-  .concept-text {
-    font-size: 15px;
-    line-height: 1.8;
-    opacity: 0.75;
-    max-width: 900px;
     margin-bottom: 24px;
   }
-  .concept-text strong {
+  section p {
+    max-width: 680px;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  section p strong {
     color: var(--green);
-    font-weight: 700;
-    opacity: 1;
+    font-weight: 600;
   }
-  .three-col {
-    display: flex;
+
+  /* ─── Divider ─── */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 120px);
+  }
+  .divider hr {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* ─── Concept cards ─── */
+  .concept-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 16px;
-    margin-top: 10px;
+    margin-top: 36px;
   }
-  .card {
-    flex: 1;
-    background: rgba(255,255,255,0.05);
-    border-radius: 6px;
-    padding: 14px 16px;
+  .concept-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 24px;
     border-top: 2px solid var(--green);
   }
-  .card b {
-    display: block;
-    font-size: 12px;
-    color: var(--green);
-    margin-bottom: 4px;
-  }
-  .card span {
-    font-size: 12px;
-    opacity: 0.5;
-    line-height: 1.5;
-  }
-
-  /* ─── Program rows ─── */
-  .row {
-    display: flex;
-    align-items: baseline;
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+  .concept-card h3 {
     font-size: 13px;
-  }
-  .row.dim { opacity: 0.2; border-bottom-color: transparent; }
-  .row .t {
-    width: 55px;
-    flex-shrink: 0;
-    font-weight: 600;
-    opacity: 0.35;
-    font-variant-numeric: tabular-nums;
-  }
-  .row .w {
-    width: 210px;
-    flex-shrink: 0;
-    font-weight: 600;
-  }
-  .row .d {
-    flex: 1;
-    opacity: 0.4;
-  }
-  .row.hl .w { color: var(--green); }
-  .tag {
-    display: inline-block;
-    font-size: 9px;
-    background: rgba(47,160,68,0.15);
-    color: var(--green);
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-weight: 700;
-    margin-left: 4px;
-    vertical-align: 1px;
-  }
-
-  /* ─── Steps row ─── */
-  .steps {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-  }
-  .step {
-    flex: 1;
-    background: rgba(255,255,255,0.04);
-    border-top: 2px solid rgba(47,160,68,0.3);
-    border-radius: 0 0 4px 4px;
-    padding: 8px 10px;
-  }
-  .step b {
-    display: block;
-    color: var(--green);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 2px;
-  }
-  .step span {
-    font-size: 11px;
-    opacity: 0.4;
-    line-height: 1.4;
-  }
-
-  /* ─── Two columns ─── */
-  .cols { display: flex; gap: 40px; }
-  .col { flex: 1; }
-  .col-title {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
     font-weight: 700;
     color: var(--green);
     margin-bottom: 8px;
   }
+  .concept-card p {
+    font-size: 14px;
+    opacity: 0.55;
+    line-height: 1.6;
+  }
 
-  .concept-box {
+  /* ─── Program ─── */
+  .program {
+    margin-top: 12px;
+  }
+  .program-row {
+    display: flex;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 16px;
+  }
+  .program-row.break {
+    opacity: 0.25;
+    border-bottom-color: transparent;
+    padding: 8px 0;
+  }
+  .program-time {
+    width: 60px;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.35;
+    font-size: 14px;
+  }
+  .program-title {
+    width: 240px;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--white);
+  }
+  .program-row.break .program-title {
+    color: var(--text);
+  }
+  .program-desc {
+    flex: 1;
+    font-size: 14px;
+    opacity: 0.45;
+    line-height: 1.5;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    background: var(--green-dim);
+    color: var(--green);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-left: 6px;
+    vertical-align: 2px;
+  }
+  .program-note {
+    padding: 4px 0 14px;
+    margin-left: 76px;
+    font-size: 13px;
+    opacity: 0.25;
+    font-style: italic;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* ─── Steps ─── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .step {
+    background: rgba(255,255,255,0.04);
+    border-top: 2px solid rgba(47,160,68,0.3);
+    border-radius: 0 0 6px 6px;
+    padding: 16px 18px;
+  }
+  .step-num {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+  .step p {
+    font-size: 13px;
+    opacity: 0.45;
+    line-height: 1.5;
+  }
+
+  /* ─── Canvas section ─── */
+  .canvas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 12px;
+  }
+  .canvas-box {
     background: rgba(255,255,255,0.04);
     border-left: 3px solid var(--green);
-    padding: 12px 14px;
-    font-size: 12.5px;
+    padding: 20px 24px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
     line-height: 1.7;
     opacity: 0.6;
-    border-radius: 0 4px 4px 0;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
   }
-
+  .canvas-box strong {
+    color: var(--green);
+    font-weight: 600;
+    opacity: 1;
+  }
+  .list-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .deliverables li {
+    list-style: none;
+    padding: 4px 0;
+    font-size: 14px;
+    opacity: 0.5;
+  }
+  .deliverables li::before {
+    content: '\2192\00a0\00a0';
+    color: var(--green);
+    opacity: 0.5;
+  }
   .lenses {
     list-style: none;
-    padding: 0;
-    columns: 2;
-    column-gap: 24px;
-    font-size: 12.5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 24px;
   }
-  .lenses li { padding: 3px 0; opacity: 0.55; break-inside: avoid; }
-  .lenses .n { font-weight: 800; color: var(--green); display: inline-block; width: 22px; }
+  .lenses li {
+    padding: 4px 0;
+    font-size: 14px;
+    opacity: 0.55;
+  }
+  .lens-num {
+    display: inline-block;
+    width: 26px;
+    font-weight: 800;
+    color: var(--green);
+  }
 
-  .items {
+  /* ─── Next steps ─── */
+  .next-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 12px;
+  }
+  .next-list li {
     list-style: none;
-    padding: 0;
-    font-size: 12.5px;
+    padding: 5px 0;
+    font-size: 14px;
+    opacity: 0.5;
   }
-  .items li { padding: 3px 0; opacity: 0.5; }
-  .items li::before { content: '→  '; color: var(--green); opacity: 0.5; }
+  .next-list li::before {
+    content: '\2192\00a0\00a0';
+    color: var(--green);
+    opacity: 0.5;
+  }
 
-  .foot {
-    position: absolute;
-    bottom: 14px;
-    left: 60px;
-    right: 60px;
-    font-size: 9px;
-    opacity: 0.15;
+  /* ─── Footer ─── */
+  footer {
+    padding: 40px clamp(24px, 6vw, 120px) 60px;
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    opacity: 0.15;
+  }
+  footer img { height: 16px; opacity: 0.6; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    .hero { min-height: 500px; max-height: 700px; }
+    .hero-content { padding-bottom: 40px; }
+    .program-row { flex-wrap: wrap; gap: 4px 12px; }
+    .program-title { width: auto; }
+    .program-desc { width: 100%; margin-left: 76px; margin-top: 2px; }
+    .program-note { margin-left: 0; }
+    .canvas-grid, .next-grid { grid-template-columns: 1fr; gap: 32px; }
+    .lenses { grid-template-columns: 1fr; }
+    section { padding: 60px clamp(24px, 6vw, 120px); }
   }
 </style>
 </head>
 <body>
 
-<div class="reveal">
-<div class="slides">
-
-<!-- 1 ── TITLE ── -->
-<section class="slide-hero">
-  <img class="logo" src="Vend_logo.svg.png" alt="Vend">
-  <div class="inner">
-    <div class="event">Vend Real Estate Gathering</div>
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <img class="hero-logo" src="Vend_logo.svg.png" alt="Vend">
+  <div class="hero-content">
+    <div class="hero-event">Vend Real Estate Gathering</div>
     <h1>Homecoming</h1>
-    <div class="sub">Building What's Next, Together</div>
-    <div class="meta">Late September 2026 &nbsp;·&nbsp; Thorbjørnrud & Kistefos &nbsp;·&nbsp; FINN · Oikotie · Vend</div>
+    <div class="hero-sub">Building What's Next, Together</div>
+    <div class="hero-meta">Late September 2026 &nbsp;&middot;&nbsp; Thorbjørnrud &amp; Kistefos &nbsp;&middot;&nbsp; FINN &middot; Oikotie &middot; Vend</div>
   </div>
-</section>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</div>
 
-<!-- 2 ── CONCEPT ── -->
-<section class="s">
-  <div class="badge">The Concept</div>
+<!-- ═══ CONCEPT ═══ -->
+<section>
+  <div class="section-label">The Concept</div>
   <h2>Two days, one story</h2>
-
-  <p class="concept-text">
-    We bring together people from <strong>FINN</strong>, <strong>Oikotie</strong>, and <strong>Vend</strong> for two days that connect our proud history with the future we need to build. Day 1 at <strong>Thorbjørnrud</strong> grounds us in who we are, how we impact lives, and the forces reshaping our world. Day 2 takes us to <strong>Kistefos Museum</strong> — where contemporary art becomes a lens for thinking differently about innovation. The gathering ends with a collaborative artwork created by all of us — <strong>The Digital Canvas</strong>.
+  <p>
+    We bring together people from <strong>FINN</strong>, <strong>Oikotie</strong>, and <strong>Vend</strong> for two days that connect our proud history with the future we need to build. Day 1 at <strong>Thorbjørnrud</strong> grounds us in who we are, how we impact lives, and the forces reshaping our world. Day 2 takes us to <strong>Kistefos Museum</strong> — where contemporary art becomes a lens for thinking differently about innovation. The gathering ends with a collaborative artwork created by all of us.
   </p>
 
-  <div class="three-col">
-    <div class="card">
-      <b>Day 1 · Thorbjørnrud</b>
-      <span>State of the union, our journey, real impact, and external perspectives. Ends with art, innovation, and cross-team connection.</span>
+  <div class="concept-cards">
+    <div class="concept-card">
+      <h3>Day 1 &middot; Thorbjørnrud</h3>
+      <p>State of the union, our journey, real impact, and external perspectives. Ends with art, innovation, and cross-team connection.</p>
     </div>
-    <div class="card">
-      <b>Day 2 · Kistefos Museum</b>
-      <span>Art as inspiration. Groups explore the museum and create a digital artwork using AI — one vision per team.</span>
+    <div class="concept-card">
+      <h3>Day 2 &middot; Kistefos Museum</h3>
+      <p>Art as inspiration. Groups explore the museum and create a digital artwork using AI — one vision per team.</p>
     </div>
-    <div class="card">
-      <b>The Digital Canvas</b>
-      <span>10 group artworks assembled live into a single mosaic — our collective vision for the future of Vend RE.</span>
+    <div class="concept-card">
+      <h3>The Digital Canvas</h3>
+      <p>10 group artworks assembled live into a single mosaic — our collective vision for the future of Vend RE.</p>
     </div>
   </div>
 </section>
 
-<!-- 3 ── DAY 1 ── -->
-<section class="s">
-  <div class="badge">Day 1 · Thorbjørnrud</div>
+<div class="divider"><hr></div>
+
+<!-- ═══ DAY 1 ═══ -->
+<section>
+  <div class="section-label">Day 1 &middot; Thorbjørnrud</div>
   <h2>Where We Come From, Where We're Going</h2>
 
-  <div class="row dim"><span class="t"></span><span class="w">Arrival at Thorbjørnrud</span><span class="d"></span></div>
-  <div class="row hl"><span class="t">10:00</span><span class="w">Welcome / State of the Union</span><span class="d">Kjersti sets the tone <span class="tag">keynote</span></span></div>
-  <div class="row hl"><span class="t">10:30</span><span class="w">Christian's Perspective</span><span class="d">View from the top</span></div>
-  <div class="row dim"><span class="t">11:00</span><span class="w">Lunch</span><span class="d"></span></div>
-  <div class="row hl"><span class="t">12:00</span><span class="w">Our Journey & Real Impact</span><span class="d">From FINN.no to Vend — how we change real lives <span class="tag">panel</span></span></div>
-  <div class="row"><span class="t"></span><span class="w"></span><span class="d" style="opacity:0.3; font-size:0.9em;">External voices: e.g. Marita (Aktiv), a renter, someone from Finland</span></div>
-  <div class="row dim"><span class="t">13:00</span><span class="w">Break</span><span class="d"></span></div>
-  <div class="row hl"><span class="t">13:15</span><span class="w">World Café</span><span class="d">Cross-team mixing — tables of 5, three rounds <span class="tag">interactive</span></span></div>
-  <div class="row hl"><span class="t">14:00</span><span class="w">Travel / Rentals</span><span class="d">Dedicated slot</span></div>
-  <div class="row hl"><span class="t">14:30</span><span class="w">Art & Innovation</span><span class="d">External speaker on art and innovation (Torgeir Waterhouse?) <span class="tag">keynote</span></span></div>
-  <div class="row dim"><span class="t">15:30</span><span class="w">Dinner & evening</span><span class="d"></span></div>
-</section>
-
-<!-- 4 ── DAY 2 ── -->
-<section class="s">
-  <div class="badge">Day 2 · Kistefos Museum</div>
-  <h2>Seeing Differently</h2>
-
-  <div class="row dim"><span class="t">09:00</span><span class="w">Breakfast</span><span class="d"></span></div>
-  <div class="row dim"><span class="t">09:30</span><span class="w">Drive to Kistefos</span><span class="d">From Thorbjørnrud</span></div>
-  <div class="row hl"><span class="t">09:45</span><span class="w">Guided Tours & Activity</span><span class="d">Groups explore the museum and sculpture park</span></div>
-  <div class="row dim"><span class="t">12:00</span><span class="w">Lunch</span><span class="d">At Kistefos or return to venue</span></div>
-  <div class="row hl"><span class="t">13:00</span><span class="w">Team Work</span><span class="d">Groups create their digital artwork using AI</span></div>
-  <div class="row hl"><span class="t">15:00</span><span class="w">Present Artwork</span><span class="d">Each group presents — 2–3 min each</span></div>
-  <div class="row hl"><span class="t">15:30</span><span class="w">Closing & The Reveal</span><span class="d">RELT panel reflections · Digital Canvas unveiled <span class="tag">end on a high</span></span></div>
-
-  <div class="steps">
-    <div class="step"><b>1. Explore</b><span>Find an artwork at Kistefos that speaks to your theme</span></div>
-    <div class="step"><b>2. Discuss</b><span>What does this disruption mean for us?</span></div>
-    <div class="step"><b>3. Create</b><span>Use AI to generate one digital artwork</span></div>
-    <div class="step"><b>4. Present</b><span>Title it, write a statement, share</span></div>
+  <div class="program">
+    <div class="program-row break">
+      <span class="program-time"></span>
+      <span class="program-title">Arrival at Thorbjørnrud</span>
+      <span class="program-desc"></span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">10:00</span>
+      <span class="program-title">Welcome / State of the Union</span>
+      <span class="program-desc">Kjersti sets the tone<span class="tag">Keynote</span></span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">10:30</span>
+      <span class="program-title">Christian's Perspective</span>
+      <span class="program-desc">View from the top</span>
+    </div>
+    <div class="program-row break">
+      <span class="program-time">11:00</span>
+      <span class="program-title">Lunch</span>
+      <span class="program-desc"></span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">12:00</span>
+      <span class="program-title">Our Journey &amp; Real Impact</span>
+      <span class="program-desc">From FINN.no to Vend — how we change real lives<span class="tag">Panel</span></span>
+    </div>
+    <div class="program-note">External voices: e.g. Marita (Aktiv), a renter, someone from Finland</div>
+    <div class="program-row break">
+      <span class="program-time">13:00</span>
+      <span class="program-title">Break</span>
+      <span class="program-desc"></span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">13:15</span>
+      <span class="program-title">World Caf&eacute;</span>
+      <span class="program-desc">Cross-team mixing — tables of 5, three rounds<span class="tag">Interactive</span></span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">14:00</span>
+      <span class="program-title">Travel / Rentals</span>
+      <span class="program-desc">Dedicated slot</span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">14:30</span>
+      <span class="program-title">Art &amp; Innovation</span>
+      <span class="program-desc">External speaker on art and innovation<span class="tag">Keynote</span></span>
+    </div>
+    <div class="program-row break">
+      <span class="program-time">15:30</span>
+      <span class="program-title">Dinner &amp; evening</span>
+      <span class="program-desc"></span>
+    </div>
   </div>
 </section>
 
-<!-- 5 ── DIGITAL CANVAS ── -->
-<section class="s">
-  <div class="badge">Group Exercise</div>
+<div class="divider"><hr></div>
+
+<!-- ═══ DAY 2 ═══ -->
+<section>
+  <div class="section-label">Day 2 &middot; Kistefos Museum</div>
+  <h2>Seeing Differently</h2>
+
+  <div class="program">
+    <div class="program-row break">
+      <span class="program-time">09:00</span>
+      <span class="program-title">Breakfast</span>
+      <span class="program-desc"></span>
+    </div>
+    <div class="program-row break">
+      <span class="program-time">09:30</span>
+      <span class="program-title">Drive to Kistefos</span>
+      <span class="program-desc">From Thorbjørnrud</span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">09:45</span>
+      <span class="program-title">Guided Tours &amp; Activity</span>
+      <span class="program-desc">Groups explore the museum and sculpture park</span>
+    </div>
+    <div class="program-row break">
+      <span class="program-time">12:00</span>
+      <span class="program-title">Lunch</span>
+      <span class="program-desc">At Kistefos or return to venue</span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">13:00</span>
+      <span class="program-title">Team Work</span>
+      <span class="program-desc">Groups create their digital artwork using AI</span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">15:00</span>
+      <span class="program-title">Present Artwork</span>
+      <span class="program-desc">Each group presents — 2&ndash;3 min each</span>
+    </div>
+    <div class="program-row">
+      <span class="program-time">15:30</span>
+      <span class="program-title">Closing &amp; The Reveal</span>
+      <span class="program-desc">RELT panel reflections &middot; Digital Canvas unveiled<span class="tag">End on a high</span></span>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1. Explore</div>
+      <p>Find an artwork at Kistefos that speaks to your theme</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2. Discuss</div>
+      <p>What does this disruption mean for us?</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3. Create</div>
+      <p>Use AI to generate one digital artwork</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4. Present</div>
+      <p>Title it, write a statement, share</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ DIGITAL CANVAS ═══ -->
+<section>
+  <div class="section-label">Group Exercise</div>
   <h2>The Digital Canvas</h2>
 
-  <div class="cols">
-    <div class="col">
-      <div class="concept-box">
-        Split into <strong style="color:var(--green)">10 groups</strong>. Each group gets a disruption theme — a "lens." At Kistefos, they find art that inspires them, then use <strong style="color:var(--green)">AI image generation</strong> to create one digital artwork. All 10 pieces are assembled live into a single mosaic — our collective vision.
+  <div class="canvas-grid">
+    <div>
+      <div class="canvas-box">
+        Split into <strong>10 groups</strong>. Each group gets a disruption theme — a "lens." At Kistefos, they find art that inspires them, then use <strong>AI image generation</strong> to create one digital artwork. All 10 pieces are assembled live into a single mosaic — our collective vision.
       </div>
-      <div class="col-title">Each group delivers</div>
-      <ul class="items">
+      <div class="list-title">Each group delivers</div>
+      <ul class="deliverables">
         <li>One AI-generated artwork</li>
         <li>A title for the piece</li>
         <li>A one-sentence artist statement</li>
-        <li>A 2–3 minute presentation</li>
+        <li>A 2&ndash;3 minute presentation</li>
       </ul>
     </div>
-    <div class="col">
-      <div class="col-title">10 Disruption Lenses</div>
+    <div>
+      <div class="list-title">10 Disruption Lenses</div>
       <ul class="lenses">
-        <li><span class="n">01</span> AI & Home Search</li>
-        <li><span class="n">02</span> Trust & Data</li>
-        <li><span class="n">03</span> New Competitors</li>
-        <li><span class="n">04</span> Sustainability</li>
-        <li><span class="n">05</span> Agent of the Future</li>
-        <li><span class="n">06</span> Global Shifts</li>
-        <li><span class="n">07</span> Generational Change</li>
-        <li><span class="n">08</span> Beyond Listings</li>
-        <li><span class="n">09</span> The Human Element</li>
-        <li><span class="n">10</span> Regulation</li>
+        <li><span class="lens-num">01</span> AI &amp; Home Search</li>
+        <li><span class="lens-num">02</span> Trust &amp; Data</li>
+        <li><span class="lens-num">03</span> New Competitors</li>
+        <li><span class="lens-num">04</span> Sustainability</li>
+        <li><span class="lens-num">05</span> Agent of the Future</li>
+        <li><span class="lens-num">06</span> Global Shifts</li>
+        <li><span class="lens-num">07</span> Generational Change</li>
+        <li><span class="lens-num">08</span> Beyond Listings</li>
+        <li><span class="lens-num">09</span> The Human Element</li>
+        <li><span class="lens-num">10</span> Regulation</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 6 ── NEXT STEPS ── -->
-<section class="s">
-  <div class="badge">Planning</div>
+<div class="divider"><hr></div>
+
+<!-- ═══ NEXT STEPS ═══ -->
+<section>
+  <div class="section-label">Planning</div>
   <h2>Next Steps</h2>
 
-  <div class="cols">
-    <div class="col">
-      <div class="col-title">Decisions needed</div>
-      <ul class="items">
+  <div class="next-grid">
+    <div>
+      <div class="list-title">Decisions needed</div>
+      <ul class="next-list">
         <li>Exact dates (late September)</li>
         <li>Confirm Thorbjørnrud availability</li>
         <li>Confirm Kistefos for group visit</li>
@@ -394,42 +609,25 @@
         <li>Panel participants (Marita, Finland rep, renter)</li>
       </ul>
     </div>
-    <div class="col">
-      <div class="col-title">Logistics</div>
-      <ul class="items">
-        <li>Transport Thorbjørnrud → Kistefos</li>
+    <div>
+      <div class="list-title">Logistics</div>
+      <ul class="next-list">
+        <li>Transport Thorbjørnrud &rarr; Kistefos</li>
         <li>Catering both days</li>
         <li>Wi-Fi / connectivity at Kistefos</li>
         <li>Rain plan for outdoor museum</li>
         <li>Group mix: FINN + Oikotie together</li>
         <li>Artwork submission platform</li>
-        <li>Live assembly canvas (built ✓)</li>
+        <li>Live assembly canvas (built &check;)</li>
       </ul>
     </div>
   </div>
-
-  <div class="foot">
-    <span>Kistefos booking: booking@kistefosmuseum.com · +47 61 31 03 83</span>
-    <span>Homecoming — Vend Real Estate Gathering 2026</span>
-  </div>
 </section>
 
-</div>
-</div>
+<footer>
+  <span>Homecoming &mdash; Vend Real Estate Gathering 2026</span>
+  <img src="Vend_logo.svg.png" alt="Vend">
+</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<script>
-Reveal.initialize({
-  hash: true,
-  width: 1280,
-  height: 720,
-  margin: 0,
-  transition: 'fade',
-  transitionSpeed: 'slow',
-  controls: true,
-  progress: true,
-  center: false
-});
-</script>
 </body>
 </html>
