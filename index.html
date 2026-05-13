@@ -484,6 +484,29 @@
     padding-bottom: 100px;
   }
 
+  /* ── COMMITTEE ── */
+  .committee-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding-bottom: 100px;
+  }
+  .cm-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 28px 24px;
+  }
+  .cm-role {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--light);
+    margin-bottom: 6px;
+  }
+  .cm-name {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
   /* ── DIVIDER ── */
   .divider {
     border: none;
@@ -522,7 +545,7 @@
     .split.reverse .split-img { order: 0; }
     .program-grid.flip .pg-photo { order: 0; }
     .cards-3 { grid-template-columns: 1fr; }
-    .steps-row { grid-template-columns: 1fr 1fr; }
+    .steps-row, .committee-grid { grid-template-columns: 1fr 1fr; }
     .venues { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
@@ -544,6 +567,7 @@
       <a href="#day2">Day 2</a>
       <a href="#mosaic">Selfie Mosaic</a>
       <a href="#canvas">Digital Canvas</a>
+      <a href="#committee">Committee</a>
     </div>
   </div>
 </nav>
@@ -914,6 +938,47 @@
         <li>QR code for selfie submissions</li>
         <li>Live canvas assembly setup</li>
       </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><hr class="divider"></div>
+
+<!-- ── COMMITTEE ── -->
+<div class="wrap" id="committee">
+  <div class="section-head">
+    <div class="split-label">Organisation</div>
+    <h2>Event Committee</h2>
+  </div>
+
+  <div class="committee-grid">
+    <div class="cm-card">
+      <div class="cm-role">Practicalities</div>
+      <div class="cm-name">Anne Ormstad</div>
+    </div>
+    <div class="cm-card">
+      <div class="cm-role">Social &amp; Rental</div>
+      <div class="cm-name">Laila Dahlen</div>
+    </div>
+    <div class="cm-card">
+      <div class="cm-role">Financials</div>
+      <div class="cm-name">Helen Eriksen</div>
+    </div>
+    <div class="cm-card">
+      <div class="cm-role">Project Management</div>
+      <div class="cm-name">&Oslash;rjan / Nora</div>
+    </div>
+    <div class="cm-card">
+      <div class="cm-role">Chief Program Officer</div>
+      <div class="cm-name">Eirik</div>
+    </div>
+    <div class="cm-card">
+      <div class="cm-role">Sales Representation</div>
+      <div class="cm-name">Karl Stensadvold / Christin</div>
+    </div>
+    <div class="cm-card">
+      <div class="cm-role">Finland Representation</div>
+      <div class="cm-name">Suvi / Yevi</div>
     </div>
   </div>
 </div>
