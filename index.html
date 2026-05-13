@@ -198,7 +198,7 @@
     margin-bottom: 48px;
   }
   .program-cols {
-    max-width: 640px;
+    max-width: 720px;
     padding-bottom: 80px;
   }
 
@@ -269,6 +269,31 @@
     font-size: 14px;
     color: var(--muted);
     font-weight: 500;
+  }
+
+  .slot-featured {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 32px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .slot-featured.flip {
+    grid-template-columns: 160px 1fr;
+  }
+  .slot-featured.flip .slot-featured-img { order: -1; }
+  .slot-featured-img {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 120px 120px 16px 16px;
+  }
+  .slot-featured-name {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 10px;
   }
   .slot.break {
     opacity: 0.35;
@@ -526,6 +551,8 @@
       gap: 40px;
     }
     .split.reverse .split-img { order: 0; }
+    .slot-featured, .slot-featured.flip { grid-template-columns: 1fr 120px; gap: 20px; }
+    .slot-featured-img { width: 120px; height: 150px; }
     .cards-2 { grid-template-columns: 1fr; }
     .cards-3 { grid-template-columns: 1fr; }
     .steps-row, .committee-grid { grid-template-columns: 1fr 1fr; }
@@ -613,29 +640,29 @@
         <div class="slot-desc" style="opacity:1;">Lunch is served before the program starts</div>
       </div>
 
-      <div class="slot">
-        <div class="slot-time">14:00</div>
-        <div class="slot-row">
-          <span class="slot-title">Welcome &amp; State of the Union</span>
-          <span class="slot-tag">Keynote</span>
+      <div class="slot-featured">
+        <div>
+          <div class="slot-time">14:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Welcome &amp; State of the Union</span>
+            <span class="slot-tag">Keynote</span>
+          </div>
+          <div class="slot-desc">Opening the gathering — where we stand, where we're going</div>
+          <div class="slot-featured-name">Kjersti Høklingen</div>
         </div>
-        <div class="slot-desc">Opening the gathering — where we stand, where we're going</div>
-        <div class="slot-speaker">
-          <img src="kjersti.jpg" alt="Kjersti">
-          <span>Kjersti Høklingen</span>
-        </div>
+        <img class="slot-featured-img" src="kjersti.jpg" alt="Kjersti Høklingen">
       </div>
 
-      <div class="slot">
-        <div class="slot-time">14:30</div>
-        <div class="slot-row">
-          <span class="slot-title">View from the Top</span>
+      <div class="slot-featured flip">
+        <div>
+          <div class="slot-time">14:30</div>
+          <div class="slot-row">
+            <span class="slot-title">View from the Top</span>
+          </div>
+          <div class="slot-desc">CEO perspective on Vend Marketplaces</div>
+          <div class="slot-featured-name">Christian Printzell Halvorsen</div>
         </div>
-        <div class="slot-desc">CEO perspective on Vend Marketplaces</div>
-        <div class="slot-speaker">
-          <img src="christian.jpg" alt="Christian">
-          <span>Christian Printzell Halvorsen</span>
-        </div>
+        <img class="slot-featured-img" src="christian.jpg" alt="Christian Printzell Halvorsen">
       </div>
 
       <div class="slot">
@@ -653,18 +680,18 @@
         <div class="slot-title">Break</div>
       </div>
 
-      <div class="slot">
-        <div class="slot-time">16:00</div>
-        <div class="slot-row">
-          <span class="slot-title">Art &amp; Innovation</span>
-          <span class="slot-tag">Keynote</span>
+      <div class="slot-featured">
+        <div>
+          <div class="slot-time">16:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Art &amp; Innovation</span>
+            <span class="slot-tag">Keynote</span>
+          </div>
+          <div class="slot-desc">Art as a lens for creative and divergent thinking — setting the stage for Day 2 at Kistefos</div>
+          <div class="slot-featured-name">Torgeir Waterhouse</div>
+          <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:4px; color:var(--light);">Alternative: Aksel Braanen Sterri (Langsikt)</div>
         </div>
-        <div class="slot-desc">Art as a lens for creative and divergent thinking — setting the stage for Day 2 at Kistefos</div>
-        <div class="slot-speaker">
-          <img src="torgeir.webp" alt="Torgeir">
-          <span>Torgeir Waterhouse</span>
-        </div>
-        <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:4px; color:var(--light);">Alternative: Aksel Braanen Sterri (Langsikt)</div>
+        <img class="slot-featured-img" src="torgeir.webp" alt="Torgeir Waterhouse">
       </div>
 
       <div class="slot break">
