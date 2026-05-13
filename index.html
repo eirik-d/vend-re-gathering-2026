@@ -61,7 +61,7 @@
     height: 56px;
     gap: 32px;
   }
-  .nav-logo { height: 20px; }
+  .nav-logo { height: 32px; }
   .nav-links { display: flex; gap: 28px; margin-left: auto; }
   .nav-links a {
     font-size: 14px;
@@ -83,6 +83,16 @@
   /* ── OPENER ── */
   .opener {
     padding: 100px 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .opener-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 280px 280px 24px 24px;
   }
   .opener-tag {
     display: inline-block;
@@ -502,6 +512,7 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 960px) {
+    .opener,
     .split, .program-grid, .program-grid.flip,
     .mosaic-split, .canvas-two, .next-two {
       grid-template-columns: 1fr;
@@ -540,10 +551,13 @@
 <!-- ── OPENER ── -->
 <div class="wrap">
   <div class="opener">
-    <div class="opener-tag">Vend Real Estate Gathering</div>
-    <h1>Homecoming</h1>
-    <div class="opener-sub">Building what's next, together. Two days that connect our proud history with the future we need to build.</div>
-    <div class="opener-meta">Late September 2026 &nbsp;&middot;&nbsp; Thorbjørnrud Hotel &amp; Kistefos Museum &nbsp;&middot;&nbsp; ~150 people</div>
+    <div>
+      <div class="opener-tag">Vend Real Estate Gathering</div>
+      <h1>Homecoming</h1>
+      <div class="opener-sub">Building what's next, together. Two days that connect our proud history with the future we need to build.</div>
+      <div class="opener-meta">Late September 2026 &nbsp;&middot;&nbsp; Thorbjørnrud Hotel &amp; Kistefos Museum &nbsp;&middot;&nbsp; ~150 people</div>
+    </div>
+    <img class="opener-img" src="kistefoss.webp" alt="The Twist at Kistefos Museum">
   </div>
 </div>
 
