@@ -325,6 +325,12 @@
   }
 
   /* ── THREE CARDS ── */
+  .cards-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-bottom: 80px;
+  }
   .cards-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -545,6 +551,7 @@
     .pg-photo, .pg-placeholder { position: static; max-width: 360px; }
     .split.reverse .split-img { order: 0; }
     .program-grid.flip .pg-photo { order: 0; }
+    .cards-2 { grid-template-columns: 1fr; }
     .cards-3 { grid-template-columns: 1fr; }
     .steps-row, .committee-grid { grid-template-columns: 1fr 1fr; }
     .venues { grid-template-columns: 1fr; }
@@ -600,7 +607,7 @@
     <img class="split-img" src="vend-brand.jpg" alt="Vend brand">
   </div>
 
-  <div class="cards-3">
+  <div class="cards-2">
     <div class="card-3">
       <h3>Day 1 &middot; Thorbjørnrud</h3>
       <p>Afternoon program (14–17): state of the union, 25 years of impact, external perspectives, and art meets innovation.</p>
@@ -608,10 +615,6 @@
     <div class="card-3">
       <h3>Day 2 &middot; Kistefos &amp; Thorbjørnrud</h3>
       <p>Morning at Kistefos for tours and inspiration. Afternoon back at Thorbjørnrud for cross-team work and the big reveal.</p>
-    </div>
-    <div class="card-3">
-      <h3>The Digital Canvas</h3>
-      <p>10 group artworks assembled live into a single mosaic — our collective vision for the future of Vend RE.</p>
     </div>
   </div>
 </div>
