@@ -198,9 +198,7 @@
     margin-bottom: 48px;
   }
   .program-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px 64px;
+    max-width: 640px;
     padding-bottom: 80px;
   }
 
@@ -522,7 +520,7 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 960px) {
     .opener,
-    .split, .program-cols,
+    .split,
     .mosaic-split, .canvas-two, .next-two {
       grid-template-columns: 1fr;
       gap: 40px;
@@ -609,7 +607,6 @@
 
   <div class="program-cols">
     <div class="pg-block">
-      <div class="pg-block-title">Afternoon Program</div>
 
       <div class="slot break">
         <div class="slot-title">Arrival &amp; lunch</div>
@@ -650,10 +647,6 @@
         <div class="slot-desc">From newspaper listings to digital platforms — our journey through 25 years and impact on housing markets in Norway and Finland</div>
         <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:6px; color:var(--light);">Suggested panelists: Marita (Aktiv Eiendomsmegling), Anne-Rita Andal (Rental association), representative from Finland</div>
       </div>
-    </div>
-
-    <div class="pg-block">
-      <div class="pg-block-title">Keynote &amp; Evening</div>
 
       <div class="slot break">
         <div class="slot-time">15:45</div>
@@ -684,6 +677,7 @@
         <div class="slot-title">Dinner &amp; evening</div>
         <div class="slot-desc">Social dinner at Thorbjørnrud — good food, good company, and time to connect across teams</div>
       </div>
+
     </div>
   </div>
 
@@ -716,7 +710,6 @@
 
   <div class="program-cols">
     <div class="pg-block">
-      <div class="pg-block-title">Morning &middot; Kistefos Museum</div>
 
       <div class="slot break">
         <div class="slot-time">09:00</div>
@@ -755,10 +748,6 @@
         </div>
         <div class="slot-desc">Groups use AI to generate one digital artwork inspired by their disruption lens. Allocated time to work with Oikotie and FINN teams.</div>
       </div>
-    </div>
-
-    <div class="pg-block">
-      <div class="pg-block-title">Afternoon &middot; Back at Thorbjørnrud</div>
 
       <div class="slot">
         <div class="slot-time">14:00</div>
