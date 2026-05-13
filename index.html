@@ -20,12 +20,15 @@
 
   :root {
     --brown: #7A2822;
-    --cream: #FBF9F8;
+    --green: #2FA044;
+    --cream: #F7F3F0;
     --white: #FFFFFF;
     --text: #1A1A1A;
-    --text-secondary: #555;
-    --text-light: #999;
-    --border: #E8E2E0;
+    --muted: #6B6560;
+    --light: #A9A4A0;
+    --border: #E8E3DF;
+    --max: 1200px;
+    --px: clamp(24px, 5vw, 80px);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,441 +42,535 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ─── Hero ─── */
-  .hero {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    max-height: 600px;
-    overflow: hidden;
-  }
-  .hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 40%;
-    display: block;
-  }
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(26,26,26,0.85) 0%,
-      rgba(26,26,26,0.4) 40%,
-      rgba(0,0,0,0) 70%
-    );
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 clamp(24px, 6vw, 100px) 48px;
-  }
-  .hero-logo {
-    position: absolute;
-    top: 28px;
-    right: clamp(24px, 6vw, 100px);
-    height: 28px;
-    z-index: 2;
-  }
-  .hero-event {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 8px;
-  }
-  .hero h1 {
-    font-size: clamp(2.8rem, 7vw, 4.5rem);
-    font-weight: 800;
-    color: #fff;
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-  .hero-sub {
-    font-size: clamp(0.95rem, 2vw, 1.2rem);
-    font-weight: 400;
-    color: rgba(255,255,255,0.45);
-    margin-top: 8px;
-  }
-  .hero-meta {
-    margin-top: 20px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.35);
-  }
-
-  /* ─── Nav ─── */
+  /* ── NAV ── */
   .nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
   .nav-inner {
-    max-width: 1200px;
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 0 clamp(24px, 6vw, 100px);
+    padding: 0 var(--px);
     display: flex;
     align-items: center;
-    gap: 28px;
-    height: 50px;
+    height: 56px;
+    gap: 32px;
+  }
+  .nav-logo { height: 20px; }
+  .nav-links { display: flex; gap: 28px; margin-left: auto; }
+  .nav-links a {
     font-size: 14px;
     font-weight: 500;
-    overflow-x: auto;
-  }
-  .nav a {
-    color: var(--text-secondary);
+    color: var(--muted);
     text-decoration: none;
-    white-space: nowrap;
     transition: color 0.2s;
   }
-  .nav a:hover { color: var(--brown); }
+  .nav-links a:hover { color: var(--brown); }
 
-  /* ─── Wrapper ─── */
+  /* ── WRAP ── */
   .wrap {
-    max-width: 1200px;
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 0 clamp(24px, 6vw, 100px);
+    padding-left: var(--px);
+    padding-right: var(--px);
   }
 
-  /* ─── Section heading ─── */
-  .section-header {
-    padding: 80px 0 32px;
+  /* ── OPENER ── */
+  .opener {
+    padding: 100px 0 40px;
   }
-  .section-label {
+  .opener-tag {
+    display: inline-block;
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--brown);
-    margin-bottom: 6px;
+    background: rgba(122,40,34,0.06);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
   }
-  .section-header h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+  .opener h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--text);
   }
-  .section-header p {
-    max-width: 580px;
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-    margin-top: 12px;
+  .opener-sub {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 20px;
+    max-width: 500px;
+    line-height: 1.5;
+  }
+  .opener-meta {
+    font-size: 14px;
+    color: var(--light);
+    margin-top: 16px;
   }
 
-  /* ─── Two-col: image + text (Vend style) ─── */
+  /* ── SPLIT SECTIONS (vend.com style) ── */
   .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    gap: 64px;
     align-items: center;
-    padding: 64px 0;
+    padding: 80px 0;
   }
-  .split.reverse { direction: rtl; }
-  .split.reverse > * { direction: ltr; }
-
+  .split.reverse .split-img { order: -1; }
   .split-img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3/4;
     object-fit: cover;
-    display: block;
+    border-radius: 280px 280px 24px 24px;
   }
-  .split-img.arch {
-    border-radius: 999px 999px 24px 24px;
-  }
-  .split-img.rounded {
+  .split-img.landscape {
+    aspect-ratio: 4/3;
     border-radius: 24px;
   }
-
-  .split-text h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+  .split-label {
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
-  .split-text p {
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.75;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
     margin-bottom: 12px;
-    max-width: 480px;
   }
-
-  /* ─── Concept cards ─── */
-  .concept-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 0 0 80px;
-  }
-  .concept-card {
-    background: var(--cream);
-    border-radius: 16px;
-    padding: 32px 28px;
-  }
-  .concept-card h3 {
-    font-size: 16px;
+  .split-content h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
     font-weight: 700;
-    margin-bottom: 10px;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
   }
-  .concept-card p {
-    font-size: 14.5px;
-    color: var(--text-secondary);
-    line-height: 1.65;
+  .split-content p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
   }
 
-  /* ─── Program ─── */
-  .program { padding-bottom: 16px; }
-  .program-item {
+  /* ── SECTION HEADER ── */
+  .section-head {
+    padding-top: 100px;
+    padding-bottom: 48px;
+  }
+  .section-head .split-label { margin-bottom: 10px; }
+  .section-head h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .section-head p {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 580px;
+    margin-top: 16px;
+  }
+
+  /* ── PROGRAM ── */
+  .program-grid {
     display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 480px;
+    gap: 64px;
+    align-items: start;
+    padding-bottom: 80px;
+  }
+  .program-grid.flip {
+    grid-template-columns: 480px 1fr;
+  }
+  .program-grid.flip .pg-photo { order: -1; }
+
+  .pg-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 280px 280px 24px 24px;
+    position: sticky;
+    top: 80px;
+  }
+  .pg-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 280px 280px 24px 24px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--light);
+    font-weight: 500;
+    position: sticky;
+    top: 80px;
+  }
+
+  .pg-block { margin-bottom: 12px; }
+  .pg-block-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .slot {
     padding: 16px 0;
     border-bottom: 1px solid var(--border);
-    align-items: baseline;
   }
-  .program-item.break { opacity: 0.3; padding: 10px 0; }
-  .p-time {
-    font-size: 14px;
+  .slot:last-child { border-bottom: none; }
+  .slot-time {
+    font-size: 13px;
     font-weight: 600;
-    color: var(--text-light);
+    color: var(--light);
     font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
   }
-  .p-title-row {
+  .slot-row {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
   }
-  .p-title {
-    font-size: 16px;
+  .slot-title {
+    font-size: 17px;
     font-weight: 600;
+    color: var(--text);
   }
-  .p-tag {
+  .slot-tag {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--white);
+    color: #fff;
     background: var(--text);
     padding: 3px 10px;
     border-radius: 100px;
   }
-  .p-desc {
-    font-size: 14.5px;
-    color: var(--text-secondary);
-    margin-top: 3px;
+  .slot-desc {
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 4px;
     line-height: 1.5;
   }
-  .p-note {
-    font-size: 13px;
-    color: var(--text-light);
-    font-style: italic;
-    margin-top: 3px;
+  .slot-speaker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .slot-speaker img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .slot-speaker span {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .slot.break {
+    opacity: 0.35;
+    padding: 10px 0;
+  }
+  .slot.break .slot-title { font-weight: 500; font-size: 15px; }
+
+  /* ── VENUE CARDS ── */
+  .venues {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 64px 0;
+  }
+  .venue-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  .venue-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 16px;
+  }
+  .venue-desc {
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.5;
   }
 
-  /* ─── Steps ─── */
-  .steps {
+  /* ── THREE CARDS ── */
+  .cards-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-bottom: 80px;
+  }
+  .card-3 {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 36px 28px;
+  }
+  .card-3 h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .card-3 p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── STEPS ROW ── */
+  .steps-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     padding: 48px 0 80px;
   }
-  .step {
+  .step-card {
     background: var(--cream);
-    border-radius: 16px;
-    padding: 28px 24px;
+    border-radius: 20px;
+    padding: 32px 24px;
   }
   .step-num {
     font-size: 32px;
     font-weight: 800;
     color: var(--brown);
-    opacity: 0.15;
+    opacity: 0.12;
     line-height: 1;
     margin-bottom: 12px;
   }
-  .step h4 {
-    font-size: 15px;
+  .step-card h4 {
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 6px;
   }
-  .step p {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.55;
+  .step-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
   }
 
-  /* ─── Canvas ─── */
-  .canvas-grid {
+  /* ── SELFIE MOSAIC MOCKUP ── */
+  .mosaic-section {
+    padding: 80px 0;
+  }
+  .mosaic-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 80px;
+    gap: 64px;
+    align-items: center;
   }
-  .canvas-intro {
-    font-size: 15.5px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-    margin-bottom: 28px;
+  .mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+    aspect-ratio: 10/7;
+    border-radius: 20px;
+    overflow: hidden;
   }
-  .canvas-intro strong { color: var(--text); font-weight: 600; }
-  .list-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 10px;
-  }
-  .deliverables { list-style: none; }
-  .deliverables li {
-    padding: 6px 0;
-    font-size: 14.5px;
-    color: var(--text-secondary);
-    padding-left: 18px;
+  .mosaic-cell {
+    background: var(--cream);
     position: relative;
+    overflow: hidden;
   }
-  .deliverables li::before {
+  .mosaic-cell::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 14px;
-    width: 6px; height: 6px;
+    inset: 0;
+    background: linear-gradient(135deg,
+      hsl(var(--h), 25%, 82%) 0%,
+      hsl(var(--h), 30%, 70%) 100%
+    );
+    opacity: 0.7;
+  }
+  .mosaic-cell .mini-face {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    aspect-ratio: 1;
+    background: hsl(var(--h), 15%, 65%);
     border-radius: 50%;
-    background: var(--brown);
-    opacity: 0.25;
+    z-index: 1;
   }
-  .lenses { list-style: none; }
-  .lenses li {
-    padding: 8px 0;
-    font-size: 14.5px;
-    color: var(--text-secondary);
+
+  /* ── CANVAS DETAIL ── */
+  .canvas-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    padding-bottom: 80px;
+  }
+  .lens-list { list-style: none; }
+  .lens-list li {
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--muted);
     border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
   }
-  .lenses li:last-child { border-bottom: none; }
-  .lens-num {
-    display: inline-block;
-    width: 28px;
+  .lens-list li:last-child { border-bottom: none; }
+  .lens-n {
+    font-size: 13px;
     font-weight: 800;
     color: var(--brown);
-    opacity: 0.3;
+    opacity: 0.25;
+    min-width: 20px;
   }
-
-  /* ─── Next ─── */
-  .next-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 80px;
+  .detail-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 12px;
   }
-  .next-list { list-style: none; }
-  .next-list li {
+  .detail-list { list-style: none; }
+  .detail-list li {
     padding: 6px 0;
-    font-size: 14.5px;
-    color: var(--text-secondary);
+    font-size: 15px;
+    color: var(--muted);
     padding-left: 18px;
     position: relative;
   }
-  .next-list li::before {
+  .detail-list li::before {
     content: '';
     position: absolute;
     left: 0;
     top: 14px;
-    width: 6px; height: 6px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--brown);
-    opacity: 0.2;
+    opacity: 0.15;
   }
 
-  /* ─── Divider ─── */
-  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+  /* ── NEXT STEPS ── */
+  .next-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    padding-bottom: 100px;
+  }
 
-  /* ─── Footer ─── */
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── FOOTER ── */
   footer {
     background: var(--text);
-    color: rgba(255,255,255,0.5);
-    padding: 40px clamp(24px, 6vw, 100px);
+    color: rgba(255,255,255,0.4);
+    padding: 40px var(--px);
   }
   .footer-inner {
-    max-width: 1200px;
+    max-width: var(--max);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
   }
   footer img {
     height: 20px;
     filter: brightness(100);
   }
 
-  /* ─── Responsive ─── */
-  @media (max-width: 900px) {
-    .split { grid-template-columns: 1fr; gap: 32px; }
-    .split.reverse { direction: ltr; }
-    .split-img { max-width: 400px; aspect-ratio: 3/4; }
-    .concept-cards { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr 1fr; }
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .split, .program-grid, .program-grid.flip,
+    .mosaic-split, .canvas-two, .next-two {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .pg-photo, .pg-placeholder { position: static; max-width: 360px; }
+    .split.reverse .split-img { order: 0; }
+    .program-grid.flip .pg-photo { order: 0; }
+    .cards-3 { grid-template-columns: 1fr; }
+    .steps-row { grid-template-columns: 1fr 1fr; }
+    .venues { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
-    .steps { grid-template-columns: 1fr; }
-    .canvas-grid, .next-grid { grid-template-columns: 1fr; gap: 32px; }
-    .hero { aspect-ratio: 4/3; }
+    .opener { padding-top: 64px; }
+    .steps-row { grid-template-columns: 1fr; }
+    .mosaic-grid { grid-template-columns: repeat(7, 1fr); grid-template-rows: repeat(5, 1fr); }
   }
 </style>
 </head>
 <body>
 
-<!-- ═══ HERO ═══ -->
-<div class="hero">
-  <img src="kistefoss.webp" alt="The Twist at Kistefos Museum">
-  <div class="hero-overlay">
-    <img class="hero-logo" src="vend-logo-new.png" alt="Vend">
-    <div class="hero-event">Vend Real Estate Gathering</div>
-    <h1>Homecoming</h1>
-    <div class="hero-sub">Building What's Next, Together</div>
-    <div class="hero-meta">Late September 2026 &nbsp;&middot;&nbsp; Thorbjørnrud &amp; Kistefos &nbsp;&middot;&nbsp; FINN &middot; Oikotie &middot; Vend</div>
-  </div>
-</div>
-
-<!-- ═══ NAV ═══ -->
+<!-- ── NAV ── -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#concept">Concept</a>
-    <a href="#day1">Day 1</a>
-    <a href="#day2">Day 2</a>
-    <a href="#canvas">Digital Canvas</a>
-    <a href="#next">Next Steps</a>
+    <img class="nav-logo" src="vend-logo-new.png" alt="Vend">
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#day1">Day 1</a>
+      <a href="#day2">Day 2</a>
+      <a href="#mosaic">Selfie Mosaic</a>
+      <a href="#canvas">Digital Canvas</a>
+    </div>
   </div>
 </nav>
 
-<!-- ═══ CONCEPT ═══ -->
+<!-- ── OPENER ── -->
+<div class="wrap">
+  <div class="opener">
+    <div class="opener-tag">Vend Real Estate Gathering</div>
+    <h1>Homecoming</h1>
+    <div class="opener-sub">Building what's next, together. Two days that connect our proud history with the future we need to build.</div>
+    <div class="opener-meta">Late September 2026 &nbsp;&middot;&nbsp; Thorbjørnrud Hotel &amp; Kistefos Museum &nbsp;&middot;&nbsp; ~150 people</div>
+  </div>
+</div>
+
+<div class="wrap"><hr class="divider"></div>
+
+<!-- ── CONCEPT ── -->
 <div class="wrap" id="concept">
   <div class="split">
-    <img class="split-img arch" src="vend-brand.jpg" alt="Vend brand">
-    <div class="split-text">
-      <div class="section-label">The Concept</div>
-      <h3>Two days, one story</h3>
-      <p>We are bringing together everyone in Vend Real Estate for two days that connect our proud history with the future we need to build.</p>
-      <p>Day 1 at Thorbjørnrud grounds us in who we are. Day 2 takes us to Kistefos Museum — where contemporary art becomes a lens for thinking differently about innovation.</p>
+    <div class="split-content">
+      <div class="split-label">The Concept</div>
+      <h2>Two days,<br>one story</h2>
+      <p>We are bringing together everyone in Vend Real Estate — FINN, Oikotie, and the Vend team — for two days that blend strategy, storytelling, and creative thinking.</p>
+      <p>Day 1 grounds us in who we are and where we're headed. Day 2 takes us to Kistefos Museum, where contemporary art becomes a lens for seeing innovation differently.</p>
     </div>
+    <img class="split-img" src="vend-brand.jpg" alt="Vend brand">
   </div>
 
-  <div class="concept-cards">
-    <div class="concept-card">
+  <div class="cards-3">
+    <div class="card-3">
       <h3>Day 1 &middot; Thorbjørnrud</h3>
-      <p>State of the union, our journey, real impact, and external perspectives. Ends with art, innovation, and cross-team connection.</p>
+      <p>State of the union, our journey, real impact stories, external perspectives, and art meets innovation.</p>
     </div>
-    <div class="concept-card">
+    <div class="card-3">
       <h3>Day 2 &middot; Kistefos Museum</h3>
-      <p>Art as inspiration. Groups explore the museum and create a digital artwork using AI — one vision per team.</p>
+      <p>Guided tours, group challenges, AI-generated artworks, and a selfie mosaic — all inspired by the art around us.</p>
     </div>
-    <div class="concept-card">
+    <div class="card-3">
       <h3>The Digital Canvas</h3>
       <p>10 group artworks assembled live into a single mosaic — our collective vision for the future of Vend RE.</p>
     </div>
@@ -482,244 +579,295 @@
 
 <div class="wrap"><hr class="divider"></div>
 
-<!-- ═══ DAY 1 ═══ -->
+<!-- ── DAY 1 ── -->
 <div class="wrap" id="day1">
-
-  <!-- Kjersti section -->
-  <div class="split reverse">
-    <img class="split-img arch" src="kjersti.jpg" alt="Kjersti Høklingen">
-    <div class="split-text">
-      <div class="section-label">Day 1 &middot; Thorbjørnrud</div>
-      <h3>Where We Come From, Where We're Going</h3>
-      <p>Kjersti Høklingen opens the gathering with the state of the union — where we are, what we've built, and where we're headed.</p>
-    </div>
+  <div class="section-head">
+    <div class="split-label">Day 1 &middot; Thorbjørnrud Hotel</div>
+    <h2>Where We Come From,<br>Where We're Going</h2>
   </div>
 
-  <!-- Day 1 Program -->
-  <div class="program">
-    <div class="program-item break">
-      <span class="p-time"></span>
-      <div><span class="p-title">Arrival at Thorbjørnrud</span></div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">10:00</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Welcome / State of the Union</span>
-          <span class="p-tag">Keynote</span>
+  <!-- Morning block — Kjersti -->
+  <div class="program-grid">
+    <div>
+      <div class="pg-block">
+        <div class="pg-block-title">Morning</div>
+
+        <div class="slot break">
+          <div class="slot-title">Arrival &amp; check-in</div>
         </div>
-        <div class="p-desc">Kjersti Høklingen sets the tone</div>
+
+        <div class="slot">
+          <div class="slot-time">10:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Welcome &amp; State of the Union</span>
+            <span class="slot-tag">Keynote</span>
+          </div>
+          <div class="slot-desc">Opening the gathering — where we stand, where we're going</div>
+          <div class="slot-speaker">
+            <img src="kjersti.jpg" alt="Kjersti">
+            <span>Kjersti Høklingen</span>
+          </div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">10:30</div>
+          <div class="slot-row">
+            <span class="slot-title">View from the Top</span>
+          </div>
+          <div class="slot-desc">CEO perspective on Vend Marketplaces</div>
+          <div class="slot-speaker">
+            <img src="christian.jpg" alt="Christian">
+            <span>Christian Printzell Halvorsen</span>
+          </div>
+        </div>
+
+        <div class="slot break">
+          <div class="slot-time">11:00</div>
+          <div class="slot-title">Lunch</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">12:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Our Journey &amp; Real Impact</span>
+            <span class="slot-tag">Panel</span>
+          </div>
+          <div class="slot-desc">From FINN.no to Vend — real stories of how we change lives</div>
+        </div>
       </div>
     </div>
-    <div class="program-item">
-      <span class="p-time">10:30</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Christian's Perspective</span>
-        </div>
-        <div class="p-desc">View from the top — CEO, Vend Marketplaces</div>
-      </div>
-    </div>
-    <div class="program-item break">
-      <span class="p-time">11:00</span>
-      <div><span class="p-title">Lunch</span></div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">12:00</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Our Journey &amp; Real Impact</span>
-          <span class="p-tag">Panel</span>
-        </div>
-        <div class="p-desc">From FINN.no to Vend — how we change real lives</div>
-        <div class="p-note">External voices: e.g. Marita (Aktiv), a renter, someone from Finland</div>
-      </div>
-    </div>
-    <div class="program-item break">
-      <span class="p-time">13:00</span>
-      <div><span class="p-title">Break</span></div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">13:15</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">World Caf&eacute;</span>
-          <span class="p-tag">Interactive</span>
-        </div>
-        <div class="p-desc">Cross-team mixing — tables of 5, three rounds</div>
-      </div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">14:00</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Travel / Rentals</span>
-        </div>
-        <div class="p-desc">Dedicated slot</div>
-      </div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">14:30</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Art &amp; Innovation</span>
-          <span class="p-tag">Keynote</span>
-        </div>
-        <div class="p-desc">External speaker on art and innovation</div>
-      </div>
-    </div>
-    <div class="program-item break">
-      <span class="p-time">15:30</span>
-      <div><span class="p-title">Dinner &amp; evening</span></div>
-    </div>
+    <img class="pg-photo" src="kjersti.jpg" alt="Kjersti Høklingen">
   </div>
 
-  <!-- Christian section -->
-  <div class="split">
-    <img class="split-img arch" src="christian.jpg" alt="Christian Printzell Halvorsen">
-    <div class="split-text">
-      <h3>Christian's Perspective</h3>
-      <p>Christian Printzell Halvorsen, CEO of Vend Marketplaces, shares his view from the top — the big picture of where our marketplaces are heading and why this moment matters.</p>
+  <!-- Afternoon block — Torgeir -->
+  <div class="program-grid flip">
+    <div>
+      <div class="pg-block">
+        <div class="pg-block-title">Afternoon</div>
+
+        <div class="slot break">
+          <div class="slot-time">13:00</div>
+          <div class="slot-title">Break</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">13:15</div>
+          <div class="slot-row">
+            <span class="slot-title">World Caf&eacute;</span>
+            <span class="slot-tag">Interactive</span>
+          </div>
+          <div class="slot-desc">Cross-team mixing — tables of 5, three rounds</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">14:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Travel / Rentals</span>
+          </div>
+          <div class="slot-desc">Dedicated vertical slot</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">14:30</div>
+          <div class="slot-row">
+            <span class="slot-title">Art &amp; Innovation</span>
+            <span class="slot-tag">Keynote</span>
+          </div>
+          <div class="slot-desc">Art as a lens for creative and divergent thinking</div>
+          <div class="slot-speaker">
+            <img src="torgeir.webp" alt="Torgeir">
+            <span>Torgeir Waterhouse</span>
+          </div>
+        </div>
+
+        <div class="slot break">
+          <div class="slot-time">15:30</div>
+          <div class="slot-title">Dinner &amp; evening</div>
+        </div>
+      </div>
     </div>
+    <img class="pg-photo" src="torgeir.webp" alt="Torgeir Waterhouse">
   </div>
 
-  <!-- Thorbjørnrud venue -->
-  <div class="split reverse">
-    <img class="split-img rounded" src="thorbjornrud.jpg" alt="Thorbjørnrud Hotell">
-    <div class="split-text">
-      <h3>Thorbjørnrud Hotell</h3>
-      <p>Our Day 1 venue sits by the lake in Jevnaker — a short drive from Oslo. Conference facilities, accommodation, and dinner all on site.</p>
+  <!-- Venues -->
+  <div class="venues">
+    <div>
+      <img class="venue-img" src="thorbjornrud.jpg" alt="Thorbjørnrud Hotell">
+      <div class="venue-name">Thorbjørnrud Hotell</div>
+      <div class="venue-desc">By the lake in Jevnaker — conference, accommodation, and dinner all on site.</div>
+    </div>
+    <div>
+      <img class="venue-img" src="kistefoss.webp" alt="Kistefos Museum">
+      <div class="venue-name">Kistefos Museum</div>
+      <div class="venue-desc">Home of The Twist — one of Europe's most striking sculpture parks.</div>
     </div>
   </div>
 </div>
 
 <div class="wrap"><hr class="divider"></div>
 
-<!-- ═══ DAY 2 ═══ -->
+<!-- ── DAY 2 ── -->
 <div class="wrap" id="day2">
-  <div class="section-header">
-    <div class="section-label">Day 2 &middot; Kistefos Museum</div>
+  <div class="section-head">
+    <div class="split-label">Day 2 &middot; Kistefos Museum</div>
     <h2>Seeing Differently</h2>
-    <p>We leave Thorbjørnrud and drive to Kistefos Museum — home of The Twist and one of Europe's most striking sculpture parks. Art becomes our tool for thinking about the future.</p>
+    <p>We leave Thorbjørnrud and drive to Kistefos — where art becomes our tool for thinking about the future.</p>
   </div>
 
-  <div class="program">
-    <div class="program-item break">
-      <span class="p-time">09:00</span>
-      <div><span class="p-title">Breakfast</span></div>
-    </div>
-    <div class="program-item break">
-      <span class="p-time">09:30</span>
-      <div>
-        <span class="p-title">Drive to Kistefos</span>
-        <div class="p-desc">From Thorbjørnrud</div>
-      </div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">09:45</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Guided Tours &amp; Activity</span>
+  <div class="program-grid">
+    <div>
+      <div class="pg-block">
+        <div class="pg-block-title">Full Day at Kistefos</div>
+
+        <div class="slot break">
+          <div class="slot-time">09:00</div>
+          <div class="slot-title">Breakfast at Thorbjørnrud</div>
         </div>
-        <div class="p-desc">Groups explore the museum and sculpture park</div>
-      </div>
-    </div>
-    <div class="program-item break">
-      <span class="p-time">12:00</span>
-      <div>
-        <span class="p-title">Lunch</span>
-        <div class="p-desc">At Kistefos</div>
-      </div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">13:00</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Team Work</span>
+
+        <div class="slot break">
+          <div class="slot-time">09:30</div>
+          <div class="slot-title">Drive to Kistefos</div>
         </div>
-        <div class="p-desc">Groups create their digital artwork using AI</div>
-      </div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">15:00</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Present Artwork</span>
+
+        <div class="slot">
+          <div class="slot-time">09:45</div>
+          <div class="slot-row">
+            <span class="slot-title">Guided Museum Tours</span>
+          </div>
+          <div class="slot-desc">Groups explore the sculpture park and installations</div>
         </div>
-        <div class="p-desc">Each group presents — 2&ndash;3 min each</div>
-      </div>
-    </div>
-    <div class="program-item">
-      <span class="p-time">15:30</span>
-      <div>
-        <div class="p-title-row">
-          <span class="p-title">Closing &amp; The Reveal</span>
-          <span class="p-tag">Finale</span>
+
+        <div class="slot">
+          <div class="slot-time">10:30</div>
+          <div class="slot-row">
+            <span class="slot-title">Selfie Challenge</span>
+            <span class="slot-tag">Individual</span>
+          </div>
+          <div class="slot-desc">Take a selfie in front of an artwork that inspires you — all photos become our mosaic</div>
         </div>
-        <div class="p-desc">RELT panel reflections &middot; Digital Canvas unveiled</div>
+
+        <div class="slot break">
+          <div class="slot-time">12:00</div>
+          <div class="slot-title">Lunch at Kistefos</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">13:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Team Work — Create Your Artwork</span>
+            <span class="slot-tag">Group</span>
+          </div>
+          <div class="slot-desc">Groups use AI to generate one digital artwork inspired by their disruption lens</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">15:00</div>
+          <div class="slot-row">
+            <span class="slot-title">Presentations</span>
+          </div>
+          <div class="slot-desc">Each group presents their artwork — 2&ndash;3 min each</div>
+        </div>
+
+        <div class="slot">
+          <div class="slot-time">15:30</div>
+          <div class="slot-row">
+            <span class="slot-title">Closing &amp; The Reveal</span>
+            <span class="slot-tag">Finale</span>
+          </div>
+          <div class="slot-desc">RELT reflections, the Digital Canvas unveiled, selfie mosaic revealed</div>
+        </div>
+
+        <div class="slot break">
+          <div class="slot-time">16:00</div>
+          <div class="slot-title">Bus back to Oslo</div>
+        </div>
       </div>
     </div>
+    <img class="pg-photo" src="kistefoss.webp" alt="Kistefos Museum" style="border-radius: 24px; aspect-ratio: 3/4; object-position: center 30%;">
   </div>
 
-  <div class="steps">
-    <div class="step">
+  <div class="steps-row">
+    <div class="step-card">
       <div class="step-num">01</div>
       <h4>Explore</h4>
-      <p>Find an artwork at Kistefos that speaks to your theme</p>
+      <p>Find an artwork at Kistefos that resonates with your theme</p>
     </div>
-    <div class="step">
+    <div class="step-card">
       <div class="step-num">02</div>
       <h4>Discuss</h4>
-      <p>What does this disruption mean for us?</p>
+      <p>What does this disruption mean for us? How should we respond?</p>
     </div>
-    <div class="step">
+    <div class="step-card">
       <div class="step-num">03</div>
       <h4>Create</h4>
-      <p>Use AI to generate one digital artwork</p>
+      <p>Use AI to generate one digital artwork per group</p>
     </div>
-    <div class="step">
+    <div class="step-card">
       <div class="step-num">04</div>
       <h4>Present</h4>
-      <p>Title it, write a statement, share</p>
+      <p>Title it, write a statement, share it with everyone</p>
     </div>
   </div>
 </div>
 
 <div class="wrap"><hr class="divider"></div>
 
-<!-- ═══ DIGITAL CANVAS ═══ -->
+<!-- ── SELFIE MOSAIC ── -->
+<div class="wrap" id="mosaic">
+  <div class="mosaic-section">
+    <div class="mosaic-split">
+      <div class="split-content">
+        <div class="split-label">Individual Activity</div>
+        <h2>The Selfie Mosaic</h2>
+        <p>During the museum tour, every person takes one selfie in front of an artwork that inspires them. All ~150 photos are assembled into a single mosaic — a portrait of us through the art we chose.</p>
+        <p>The mosaic is revealed during the closing session and becomes a recurring visual at future meetings: this is who we are, and this is how we see.</p>
+        <p style="font-size:14px; color:var(--light); margin-top:16px;">Submit via a shared link or QR code &rarr; automatic assembly</p>
+      </div>
+
+      <!-- CSS mosaic mockup -->
+      <div>
+        <div class="mosaic-grid" id="mosaic-grid"></div>
+        <div style="text-align:center; margin-top:12px; font-size:13px; color:var(--light);">Mockup: ~150 selfies assembled into one image</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><hr class="divider"></div>
+
+<!-- ── DIGITAL CANVAS ── -->
 <div class="wrap" id="canvas">
-  <div class="section-header">
-    <div class="section-label">Group Exercise</div>
+  <div class="section-head">
+    <div class="split-label">Group Exercise</div>
     <h2>The Digital Canvas</h2>
+    <p>10 groups. 10 disruption lenses. 10 AI-generated artworks. One collective vision.</p>
   </div>
 
-  <div class="canvas-grid">
+  <div class="canvas-two">
     <div>
-      <p class="canvas-intro">
-        Split into <strong>10 groups</strong>. Each group gets a disruption theme — a "lens." At Kistefos, they find art that inspires them, then use <strong>AI image generation</strong> to create one digital artwork. All 10 pieces are assembled live into a single mosaic — our collective vision.
-      </p>
-      <div class="list-title">Each group delivers</div>
-      <ul class="deliverables">
+      <div class="detail-label">Each group delivers</div>
+      <ul class="detail-list">
         <li>One AI-generated artwork</li>
         <li>A title for the piece</li>
         <li>A one-sentence artist statement</li>
         <li>A 2&ndash;3 minute presentation</li>
       </ul>
+      <br>
+      <p style="font-size:15px; color:var(--muted); line-height:1.7;">All 10 pieces are assembled live during the closing into a single mosaic — inspired by Beeple's "Everydays" concept. The result becomes our lasting artifact.</p>
     </div>
     <div>
-      <div class="list-title">10 Disruption Lenses</div>
-      <ul class="lenses">
-        <li><span class="lens-num">01</span> AI &amp; Home Search</li>
-        <li><span class="lens-num">02</span> Trust &amp; Data</li>
-        <li><span class="lens-num">03</span> New Competitors</li>
-        <li><span class="lens-num">04</span> Sustainability</li>
-        <li><span class="lens-num">05</span> Agent of the Future</li>
-        <li><span class="lens-num">06</span> Global Shifts</li>
-        <li><span class="lens-num">07</span> Generational Change</li>
-        <li><span class="lens-num">08</span> Beyond Listings</li>
-        <li><span class="lens-num">09</span> The Human Element</li>
-        <li><span class="lens-num">10</span> Regulation</li>
+      <div class="detail-label">10 Disruption Lenses</div>
+      <ul class="lens-list">
+        <li><span class="lens-n">01</span> AI &amp; Home Search</li>
+        <li><span class="lens-n">02</span> Trust &amp; Data Transparency</li>
+        <li><span class="lens-n">03</span> New Competitors &amp; Marketplace Dynamics</li>
+        <li><span class="lens-n">04</span> Sustainability &amp; Green Housing</li>
+        <li><span class="lens-n">05</span> The Agent of the Future</li>
+        <li><span class="lens-n">06</span> Global Shifts &amp; New Market Models</li>
+        <li><span class="lens-n">07</span> Generational Change in Homebuying</li>
+        <li><span class="lens-n">08</span> Beyond Listings — Platform Innovation</li>
+        <li><span class="lens-n">09</span> The Human Element in a Digital World</li>
+        <li><span class="lens-n">10</span> Regulation as Innovation Driver</li>
       </ul>
     </div>
   </div>
@@ -727,47 +875,64 @@
 
 <div class="wrap"><hr class="divider"></div>
 
-<!-- ═══ NEXT STEPS ═══ -->
-<div class="wrap" id="next">
-  <div class="section-header">
-    <div class="section-label">Planning</div>
+<!-- ── NEXT STEPS ── -->
+<div class="wrap">
+  <div class="section-head">
+    <div class="split-label">Planning</div>
     <h2>Next Steps</h2>
   </div>
 
-  <div class="next-grid">
+  <div class="next-two">
     <div>
-      <div class="list-title">Decisions needed</div>
-      <ul class="next-list">
+      <div class="detail-label">Decisions needed</div>
+      <ul class="detail-list">
         <li>Exact dates (late September)</li>
         <li>Confirm Thorbjørnrud availability</li>
         <li>Confirm Kistefos for group visit</li>
-        <li>External speakers (panel + art/innovation)</li>
+        <li>External speakers for panel</li>
         <li>AI image tool for group exercise</li>
         <li>Travel / Rentals session content</li>
-        <li>Panel participants</li>
+        <li>Selfie mosaic submission tool</li>
       </ul>
     </div>
     <div>
-      <div class="list-title">Logistics</div>
-      <ul class="next-list">
-        <li>Transport Thorbjørnrud &rarr; Kistefos</li>
+      <div class="detail-label">Logistics</div>
+      <ul class="detail-list">
+        <li>Transport Thorbjørnrud &rarr; Kistefos (~15 min)</li>
         <li>Catering both days</li>
         <li>Wi-Fi / connectivity at Kistefos</li>
         <li>Rain plan for outdoor museum</li>
-        <li>Group mix: FINN + Oikotie together</li>
-        <li>Artwork submission platform</li>
-        <li>Live assembly canvas</li>
+        <li>Group mix across teams</li>
+        <li>QR code for selfie submissions</li>
+        <li>Live canvas assembly setup</li>
       </ul>
     </div>
   </div>
 </div>
 
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
     <span>Homecoming &mdash; Vend Real Estate Gathering 2026</span>
     <img src="vend-logo-new.png" alt="Vend">
   </div>
 </footer>
+
+<script>
+// Generate mosaic mockup cells with varied colors
+const grid = document.getElementById('mosaic-grid');
+const hues = [15, 25, 35, 140, 180, 200, 220, 280, 320, 340, 30, 45, 160, 190, 210];
+for (let i = 0; i < 70; i++) {
+  const cell = document.createElement('div');
+  cell.className = 'mosaic-cell';
+  const h = hues[i % hues.length] + Math.floor(Math.random() * 20 - 10);
+  cell.style.setProperty('--h', h);
+  const face = document.createElement('div');
+  face.className = 'mini-face';
+  cell.appendChild(face);
+  grid.appendChild(cell);
+}
+</script>
 
 </body>
 </html>
