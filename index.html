@@ -190,39 +190,18 @@
   }
 
   /* ── PROGRAM ── */
-  .program-grid {
-    display: grid;
-    grid-template-columns: 1fr 480px;
-    gap: 64px;
-    align-items: start;
-    padding-bottom: 80px;
-  }
-  .program-grid.flip {
-    grid-template-columns: 480px 1fr;
-  }
-  .program-grid.flip .pg-photo { order: -1; }
-
-  .pg-photo {
+  .program-banner {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 21/9;
     object-fit: cover;
-    border-radius: 280px 280px 24px 24px;
-    position: sticky;
-    top: 80px;
+    border-radius: 20px;
+    margin-bottom: 48px;
   }
-  .pg-placeholder {
-    width: 100%;
-    aspect-ratio: 3/4;
-    border-radius: 280px 280px 24px 24px;
-    background: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: var(--light);
-    font-weight: 500;
-    position: sticky;
-    top: 80px;
+  .program-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 64px;
+    padding-bottom: 80px;
   }
 
   .pg-block { margin-bottom: 12px; }
@@ -543,14 +522,12 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 960px) {
     .opener,
-    .split, .program-grid, .program-grid.flip,
+    .split, .program-cols,
     .mosaic-split, .canvas-two, .next-two {
       grid-template-columns: 1fr;
       gap: 40px;
     }
-    .pg-photo, .pg-placeholder { position: static; max-width: 360px; }
     .split.reverse .split-img { order: 0; }
-    .program-grid.flip .pg-photo { order: 0; }
     .cards-2 { grid-template-columns: 1fr; }
     .cards-3 { grid-template-columns: 1fr; }
     .steps-row, .committee-grid { grid-template-columns: 1fr 1fr; }
@@ -624,106 +601,107 @@
 <!-- ── DAY 1 ── -->
 <div class="wrap" id="day1">
   <div class="section-head">
-    <div class="split-label">Day 1 &middot; Thorbjørnrud Hotel &middot; 14:00–17:00</div>
+    <div class="split-label">Day 1 &middot; Thorbjørnrud Hotel &middot; 13:15–18:00</div>
     <h2>Where We Come From,<br>Where We're Going</h2>
   </div>
 
-  <!-- Opening block — Kjersti -->
-  <div class="program-grid">
-    <div>
-      <div class="pg-block">
-        <div class="pg-block-title">Afternoon Program</div>
+  <img class="program-banner" src="Hotel.jpg.webp" alt="Thorbjørnrud Hotell">
 
-        <div class="slot break">
-          <div class="slot-title">Arrival &amp; lunch</div>
-          <div class="slot-desc" style="opacity:1;">Lunch is served before the program starts</div>
+  <div class="program-cols">
+    <div class="pg-block">
+      <div class="pg-block-title">Afternoon Program</div>
+
+      <div class="slot break">
+        <div class="slot-title">Arrival &amp; lunch</div>
+        <div class="slot-desc" style="opacity:1;">Lunch is served before the program starts</div>
+      </div>
+
+      <div class="slot">
+        <div class="slot-time">13:15</div>
+        <div class="slot-row">
+          <span class="slot-title">World Caf&eacute;</span>
+          <span class="slot-tag">Interactive</span>
         </div>
+        <div class="slot-desc">Cross-team mixing — tables of 5, three rounds</div>
+      </div>
 
-        <div class="slot">
-          <div class="slot-time">14:00</div>
-          <div class="slot-row">
-            <span class="slot-title">Welcome &amp; State of the Union</span>
-            <span class="slot-tag">Keynote</span>
-          </div>
-          <div class="slot-desc">Opening the gathering — where we stand, where we're going</div>
-          <div class="slot-speaker">
-            <img src="kjersti.jpg" alt="Kjersti">
-            <span>Kjersti Høklingen</span>
-          </div>
+      <div class="slot">
+        <div class="slot-time">14:00</div>
+        <div class="slot-row">
+          <span class="slot-title">Travel / Rentals</span>
         </div>
+        <div class="slot-desc">Dedicated vertical slot</div>
+      </div>
 
-        <div class="slot">
-          <div class="slot-time">14:30</div>
-          <div class="slot-row">
-            <span class="slot-title">View from the Top</span>
-          </div>
-          <div class="slot-desc">CEO perspective on Vend Marketplaces</div>
-          <div class="slot-speaker">
-            <img src="christian.jpg" alt="Christian">
-            <span>Christian Printzell Halvorsen</span>
-          </div>
+      <div class="slot">
+        <div class="slot-time">14:30</div>
+        <div class="slot-row">
+          <span class="slot-title">Welcome &amp; State of the Union</span>
+          <span class="slot-tag">Keynote</span>
         </div>
-
-        <div class="slot">
-          <div class="slot-time">15:00</div>
-          <div class="slot-row">
-            <span class="slot-title">Our Journey &amp; Real Impact</span>
-            <span class="slot-tag">Panel</span>
-          </div>
-          <div class="slot-desc">From newspaper listings to digital platforms — our journey through 25 years and impact on housing markets in Norway and Finland</div>
-          <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:6px; color:var(--light);">Suggested panelists: Marita (Aktiv Eiendomsmegling), Anne-Rita Andal (Rental association), representative from Finland</div>
+        <div class="slot-desc">Opening the gathering — where we stand, where we're going</div>
+        <div class="slot-speaker">
+          <img src="kjersti.jpg" alt="Kjersti">
+          <span>Kjersti Høklingen</span>
         </div>
       </div>
-    </div>
-    <img class="pg-photo" src="kjersti.jpg" alt="Kjersti Høklingen">
-  </div>
 
-  <!-- Keynote block — Torgeir or Aksel -->
-  <div class="program-grid flip">
-    <div>
-      <div class="pg-block">
-        <div class="pg-block-title">Keynote &amp; Close</div>
-
-        <div class="slot break">
-          <div class="slot-time">15:45</div>
-          <div class="slot-title">Break</div>
+      <div class="slot">
+        <div class="slot-time">15:00</div>
+        <div class="slot-row">
+          <span class="slot-title">View from the Top</span>
         </div>
-
-        <div class="slot">
-          <div class="slot-time">16:00</div>
-          <div class="slot-row">
-            <span class="slot-title">Art &amp; Innovation</span>
-            <span class="slot-tag">Keynote</span>
-          </div>
-          <div class="slot-desc">Art as a lens for creative and divergent thinking — setting the stage for Day 2 at Kistefos</div>
-          <div class="slot-speaker">
-            <img src="torgeir.webp" alt="Torgeir">
-            <span>Torgeir Waterhouse</span>
-          </div>
-          <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:4px; color:var(--light);">Alternative: Aksel Braanen Sterri (Langsikt)</div>
-        </div>
-
-        <div class="slot break">
-          <div class="slot-time">17:00</div>
-          <div class="slot-title">Close Day 1</div>
+        <div class="slot-desc">CEO perspective on Vend Marketplaces</div>
+        <div class="slot-speaker">
+          <img src="christian.jpg" alt="Christian">
+          <span>Christian Printzell Halvorsen</span>
         </div>
       </div>
-    </div>
-    <img class="pg-photo" src="torgeir.webp" alt="Torgeir Waterhouse">
-  </div>
 
-  <!-- Dinner -->
-  <div class="program-grid flip">
-    <div>
-      <div class="pg-block">
-        <div class="slot">
-          <div class="slot-time">18:00</div>
-          <div class="slot-title">Dinner &amp; evening</div>
-          <div class="slot-desc">Social dinner at Thorbjørnrud — good food, good company, and time to connect across teams.</div>
+      <div class="slot">
+        <div class="slot-time">15:30</div>
+        <div class="slot-row">
+          <span class="slot-title">Our Journey &amp; Real Impact</span>
+          <span class="slot-tag">Panel</span>
         </div>
+        <div class="slot-desc">From newspaper listings to digital platforms — our journey through 25 years and impact on housing markets in Norway and Finland</div>
+        <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:6px; color:var(--light);">Suggested panelists: Marita (Aktiv Eiendomsmegling), Anne-Rita Andal (Rental association), representative from Finland</div>
       </div>
     </div>
-    <img class="pg-photo" src="dinner.webp" alt="Dinner">
+
+    <div class="pg-block">
+      <div class="pg-block-title">Keynote &amp; Evening</div>
+
+      <div class="slot break">
+        <div class="slot-time">16:15</div>
+        <div class="slot-title">Break</div>
+      </div>
+
+      <div class="slot">
+        <div class="slot-time">16:30</div>
+        <div class="slot-row">
+          <span class="slot-title">Art &amp; Innovation</span>
+          <span class="slot-tag">Keynote</span>
+        </div>
+        <div class="slot-desc">Art as a lens for creative and divergent thinking — setting the stage for Day 2 at Kistefos</div>
+        <div class="slot-speaker">
+          <img src="torgeir.webp" alt="Torgeir">
+          <span>Torgeir Waterhouse</span>
+        </div>
+        <div class="slot-desc" style="font-style:italic; font-size:13px; margin-top:4px; color:var(--light);">Alternative: Aksel Braanen Sterri (Langsikt)</div>
+      </div>
+
+      <div class="slot break">
+        <div class="slot-time">17:30</div>
+        <div class="slot-title">Close Day 1</div>
+      </div>
+
+      <div class="slot">
+        <div class="slot-time">18:00</div>
+        <div class="slot-title">Dinner &amp; evening</div>
+        <div class="slot-desc">Social dinner at Thorbjørnrud — good food, good company, and time to connect across teams</div>
+      </div>
+    </div>
   </div>
 
   <!-- Venues -->
@@ -751,84 +729,76 @@
     <p>Morning at Kistefos Museum — art, exploration, and inspiration. Afternoon back at Thorbjørnrud — team work and the big reveal.</p>
   </div>
 
-  <!-- Morning at Kistefos -->
-  <div class="program-grid">
-    <div>
-      <div class="pg-block">
-        <div class="pg-block-title">Morning &middot; Kistefos Museum</div>
+  <img class="program-banner" src="art-kistefos.webp" alt="Art at Kistefos">
 
-        <div class="slot break">
-          <div class="slot-time">09:00</div>
-          <div class="slot-title">Breakfast at Thorbjørnrud</div>
-        </div>
+  <div class="program-cols">
+    <div class="pg-block">
+      <div class="pg-block-title">Morning &middot; Kistefos Museum</div>
 
-        <div class="slot break">
-          <div class="slot-time">09:30</div>
-          <div class="slot-title">Drive to Kistefos</div>
-        </div>
+      <div class="slot break">
+        <div class="slot-time">09:00</div>
+        <div class="slot-title">Breakfast at Thorbjørnrud</div>
+      </div>
 
-        <div class="slot">
-          <div class="slot-time">09:45</div>
-          <div class="slot-row">
-            <span class="slot-title">Kistefos Visit</span>
-            <span class="slot-tag">Groups</span>
-          </div>
-          <div class="slot-desc">Guided or self-guided tours in groups through the sculpture park and installations. Team work exercise integrated into the visit. Take a selfie in front of an artwork that inspires you — all photos become our mosaic.</div>
-        </div>
+      <div class="slot break">
+        <div class="slot-time">09:30</div>
+        <div class="slot-title">Drive to Kistefos</div>
+      </div>
 
-        <div class="slot break">
-          <div class="slot-time">12:00</div>
-          <div class="slot-title">Lunch at Kistefos</div>
+      <div class="slot">
+        <div class="slot-time">09:45</div>
+        <div class="slot-row">
+          <span class="slot-title">Kistefos Visit</span>
+          <span class="slot-tag">Groups</span>
         </div>
+        <div class="slot-desc">Guided or self-guided tours in groups through the sculpture park and installations. Team work exercise integrated into the visit.</div>
+      </div>
+
+      <div class="slot break">
+        <div class="slot-time">12:00</div>
+        <div class="slot-title">Lunch at Kistefos</div>
+      </div>
+
+      <div class="slot break">
+        <div class="slot-time">12:45</div>
+        <div class="slot-title">Drive back to Thorbjørnrud</div>
+      </div>
+
+      <div class="slot">
+        <div class="slot-time">13:00</div>
+        <div class="slot-row">
+          <span class="slot-title">Team Work &mdash; Create Your Artwork</span>
+          <span class="slot-tag">Group</span>
+        </div>
+        <div class="slot-desc">Groups use AI to generate one digital artwork inspired by their disruption lens. Allocated time to work with Oikotie and FINN teams.</div>
       </div>
     </div>
-    <img class="pg-photo" src="art-kistefos.webp" alt="Art at Kistefos" style="border-radius: 24px; aspect-ratio: 3/4; object-position: center;">
-  </div>
 
-  <!-- Afternoon back at Thorbjørnrud -->
-  <div class="program-grid flip">
-    <div>
-      <div class="pg-block">
-        <div class="pg-block-title">Afternoon &middot; Back at Thorbjørnrud</div>
+    <div class="pg-block">
+      <div class="pg-block-title">Afternoon &middot; Back at Thorbjørnrud</div>
 
-        <div class="slot break">
-          <div class="slot-time">12:45</div>
-          <div class="slot-title">Drive back to Thorbjørnrud</div>
+      <div class="slot">
+        <div class="slot-time">15:00</div>
+        <div class="slot-row">
+          <span class="slot-title">Presentations</span>
         </div>
+        <div class="slot-desc">Each group presents their artwork — 2&ndash;3 min each</div>
+      </div>
 
-        <div class="slot">
-          <div class="slot-time">13:00</div>
-          <div class="slot-row">
-            <span class="slot-title">Team Work Sessions</span>
-            <span class="slot-tag">2 Hours</span>
-          </div>
-          <div class="slot-desc">Allocated time to work together across Oikotie and FINN teams — from inspiration to action</div>
+      <div class="slot">
+        <div class="slot-time">15:30</div>
+        <div class="slot-row">
+          <span class="slot-title">Closing &amp; The Reveal</span>
+          <span class="slot-tag">Finale</span>
         </div>
+        <div class="slot-desc">RELT reflections, the Digital Canvas unveiled, selfie mosaic revealed</div>
+      </div>
 
-        <div class="slot">
-          <div class="slot-time">15:00</div>
-          <div class="slot-row">
-            <span class="slot-title">Presentations</span>
-          </div>
-          <div class="slot-desc">Each group presents their artwork — 2&ndash;3 min each</div>
-        </div>
-
-        <div class="slot">
-          <div class="slot-time">15:30</div>
-          <div class="slot-row">
-            <span class="slot-title">Closing &amp; The Reveal</span>
-            <span class="slot-tag">Finale</span>
-          </div>
-          <div class="slot-desc">RELT reflections, the Digital Canvas unveiled, selfie mosaic revealed</div>
-        </div>
-
-        <div class="slot break">
-          <div class="slot-time">16:00</div>
-          <div class="slot-title">Bus back to Oslo</div>
-        </div>
+      <div class="slot break">
+        <div class="slot-time">16:00</div>
+        <div class="slot-title">Bus back to Oslo</div>
       </div>
     </div>
-    <img class="pg-photo" src="Hotel.jpg.webp" alt="Thorbjørnrud Hotell">
   </div>
 
   <div class="steps-row">
