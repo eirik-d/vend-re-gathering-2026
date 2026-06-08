@@ -832,7 +832,6 @@
           <div class="slot-expand-body">
             <p>During the museum tour, every person takes one selfie in front of an artwork that inspires them. All ~150 photos are assembled into a single mosaic — a portrait of us through the art we chose.</p>
             <p>The mosaic is revealed during the closing session and becomes a recurring visual at future meetings.</p>
-            <div class="mosaic-grid" id="mosaic-grid" style="margin-top:16px;"></div>
           </div>
         </details>
       </div>
@@ -873,21 +872,6 @@
   </div>
 </footer>
 
-<script>
-// Generate mosaic mockup cells with varied colors
-const grid = document.getElementById('mosaic-grid');
-const hues = [15, 25, 35, 140, 180, 200, 220, 280, 320, 340, 30, 45, 160, 190, 210];
-for (let i = 0; i < 70; i++) {
-  const cell = document.createElement('div');
-  cell.className = 'mosaic-cell';
-  const h = hues[i % hues.length] + Math.floor(Math.random() * 20 - 10);
-  cell.style.setProperty('--h', h);
-  const face = document.createElement('div');
-  face.className = 'mini-face';
-  cell.appendChild(face);
-  grid.appendChild(cell);
-}
-</script>
 
 </body>
 </html>
