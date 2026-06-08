@@ -386,6 +386,54 @@
     line-height: 1.5;
   }
 
+  /* ── SLOT EXPAND (details/summary) ── */
+  .slot-expand {
+    margin-top: 12px;
+  }
+  .slot-expand summary {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brown);
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .slot-expand summary::-webkit-details-marker { display: none; }
+  .slot-expand summary::before {
+    content: '+';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(122,40,34,0.08);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brown);
+    flex-shrink: 0;
+  }
+  .slot-expand[open] summary::before { content: '\2212'; }
+  .slot-expand-body {
+    margin-top: 14px;
+    padding: 20px 24px;
+    background: var(--cream);
+    border-radius: 16px;
+  }
+  .slot-expand-body p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .slot-expand-body p:last-of-type { margin-bottom: 0; }
+  .slot-expand-body .mosaic-grid {
+    max-width: 400px;
+    border-radius: 12px;
+  }
+
   /* ── SELFIE MOSAIC MOCKUP ── */
   .mosaic-section {
     padding: 80px 0;
@@ -575,8 +623,6 @@
       <a href="#concept">Concept</a>
       <a href="#day1">Day 1</a>
       <a href="#day2">Day 2</a>
-      <a href="#mosaic">Selfie Mosaic</a>
-      <a href="#committee">Committee</a>
     </div>
   </div>
 </nav>
@@ -781,6 +827,14 @@
           <span class="slot-tag">Groups</span>
         </div>
         <div class="slot-desc">Guided or self-guided tours in groups through the sculpture park and installations.</div>
+        <details class="slot-expand">
+          <summary>The Selfie Mosaic</summary>
+          <div class="slot-expand-body">
+            <p>During the museum tour, every person takes one selfie in front of an artwork that inspires them. All ~150 photos are assembled into a single mosaic — a portrait of us through the art we chose.</p>
+            <p>The mosaic is revealed during the closing session and becomes a recurring visual at future meetings.</p>
+            <div class="mosaic-grid" id="mosaic-grid" style="margin-top:16px;"></div>
+          </div>
+        </details>
       </div>
 
       <div class="slot break">
@@ -809,104 +863,6 @@
   </div>
 
 
-</div>
-
-<div class="wrap"><hr class="divider"></div>
-
-<!-- ── SELFIE MOSAIC ── -->
-<div class="wrap" id="mosaic">
-  <div class="mosaic-section">
-    <div class="mosaic-split">
-      <div class="split-content">
-        <div class="split-label">Individual Activity</div>
-        <h2>The Selfie Mosaic</h2>
-        <p>During the museum tour, every person takes one selfie in front of an artwork that inspires them. All ~150 photos are assembled into a single mosaic — a portrait of us through the art we chose.</p>
-        <p>The mosaic is revealed during the closing session and becomes a recurring visual at future meetings.</p>
-      </div>
-
-      <!-- CSS mosaic mockup -->
-      <div>
-        <div class="mosaic-grid" id="mosaic-grid"></div>
-        <div style="text-align:center; margin-top:12px; font-size:13px; color:var(--light);">Mockup: ~150 selfies assembled into one image</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrap"><hr class="divider"></div>
-
-<!-- ── NEXT STEPS ── -->
-<div class="wrap">
-  <div class="section-head">
-    <div class="split-label">Planning</div>
-    <h2>Next Steps</h2>
-  </div>
-
-  <div class="next-two">
-    <div>
-      <div class="detail-label">Decisions needed</div>
-      <ul class="detail-list">
-        <li>Exact dates (late September)</li>
-        <li>Confirm Thorbjørnrud availability</li>
-        <li>Confirm Kistefos for group visit</li>
-        <li>External speakers for panel</li>
-        <li>Afternoon Day 2 program content</li>
-        <li>Selfie mosaic submission tool</li>
-      </ul>
-    </div>
-    <div>
-      <div class="detail-label">Logistics</div>
-      <ul class="detail-list">
-        <li>Transport Thorbjørnrud &rarr; Kistefos (~15 min)</li>
-        <li>Catering both days</li>
-        <li>Wi-Fi / connectivity at Kistefos</li>
-        <li>Rain plan for outdoor museum</li>
-        <li>Group mix across teams</li>
-        <li>QR code for selfie submissions</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="wrap"><hr class="divider"></div>
-
-<!-- ── COMMITTEE ── -->
-<div class="wrap" id="committee">
-  <div class="section-head">
-    <div class="split-label">Organisation</div>
-    <h2>Event Committee</h2>
-  </div>
-
-  <div class="committee-grid">
-    <div class="cm-card">
-      <div class="cm-role">Practicalities</div>
-      <div class="cm-name">Anne Ormstad</div>
-    </div>
-    <div class="cm-card">
-      <div class="cm-role">Social &amp; Rental</div>
-      <div class="cm-name">Laila Dahlen</div>
-    </div>
-    <div class="cm-card">
-      <div class="cm-role">Financials</div>
-      <div class="cm-name">Helen Eriksen</div>
-    </div>
-    <div class="cm-card">
-      <div class="cm-role">Project Management</div>
-      <div class="cm-name">&Oslash;rjan / Nora</div>
-    </div>
-    <div class="cm-card">
-      <div class="cm-role">Chief Program Officer</div>
-      <div class="cm-name">Eirik</div>
-    </div>
-    <div class="cm-card">
-      <div class="cm-role">Sales Representation</div>
-      <div class="cm-name">Karl Stensadvold / Christin</div>
-    </div>
-    <div class="cm-card">
-      <div class="cm-role">Finland Representation</div>
-      <div class="cm-name">Suvi / Yevi</div>
-    </div>
-  </div>
 </div>
 
 <!-- ── FOOTER ── -->
